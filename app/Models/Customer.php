@@ -4,19 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-class Client extends Model
+class Customer extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'clients';
+    protected $table = 'customers';
 
     //public $timestamps = false;
 
     public static function updateClientData($id,$data){
-    	DB::table('clients')
+    	DB::table('customers')
     	->where('id', $id)
     	->update($data);
     }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Units;
+use App\Models\Unit;
 
-class UnitsController extends Controller {
+class UnitController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class UnitsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $data['all_units'] = Units::all(); //      
+        $data['all_units'] = Unit::all(); //      
         return view("admin.units.all_units", $data);
     }
 
@@ -28,7 +28,7 @@ class UnitsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $unit = new Units;
+        $unit = new Unit;
         $request->validate([
             'unit_name' => 'required|unique:units',
             'unit_code' => 'required|unique:units'
@@ -55,7 +55,7 @@ class UnitsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        $data['unit_data'] = Units::find($id);
+        $data['unit_data'] = Unit::find($id);
         return view('admin.units.edit_units', $data);
     }
 
@@ -67,7 +67,7 @@ class UnitsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $unit_data = Units::find($id);
+        $unit_data = Unit::find($id);
         $request->validate([
             'unit_name' => 'required|unique:units,unit_name,'.$id,
             'unit_code' => 'required|unique:units,unit_code,'.$id
@@ -84,7 +84,7 @@ class UnitsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        Units::find($id)->delete();
+        Unit::find($id)->delete();
         return redirect('units');
     }
 

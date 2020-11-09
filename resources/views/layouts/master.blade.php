@@ -101,10 +101,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             @if($user->can('view-customer'))
                             <li class="nav-item">
-                                <a href="{{url('clients')}}" class="nav-link">
+                                <a href="{{url('customers')}}" class="nav-link">
                                     <i class="fas fa-users nav-icon"></i>
                                     <p>
-                                        Clients
+                                        Customer
                                     </p>
                                 </a>
                             </li>

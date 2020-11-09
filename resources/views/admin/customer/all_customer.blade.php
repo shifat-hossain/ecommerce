@@ -11,12 +11,12 @@
 <div class="col-12">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Client List</h4>
+            <h4 class="card-title">Customer List</h4>
 
             @if(Auth::user()->can('add-customer'))
             <div class="card-tools">
-                <a href="{{url('clients/create')}}" class="btn  btn-info btn-sm" >
-                    <i class="fas fa-plus-circle"></i> Add New Client
+                <a href="{{url('customers/create')}}" class="btn  btn-info btn-sm" >
+                    <i class="fas fa-plus-circle"></i> Add New Customer
                 </a>
             </div>
             @endif
@@ -27,7 +27,7 @@
                 <thead>
                     <tr>
                         <th>Sl</th>
-                        <th>Name</th>
+                        <th>First Name</th>
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Country</th>
@@ -45,7 +45,7 @@
 <script type="text/javascript">
 
     $(document).on('click','.client_status',function(){
-        var url = "{{url("change-client-status")}}";
+        var url = "{{url("change-customer-status")}}";
         var id = $(this).data("id");        
         $.ajax({
             headers: {
@@ -61,7 +61,7 @@
                 
             }
         }).done(function() {
-            //window.location.href = "{{ url('clients')}}";
+            //window.location.href = "{{ url('customers')}}";
             // window.location.reload();
         });
 
@@ -83,7 +83,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url : "{{url("client-list")}}",
+            url : "{{url("customer-list")}}",
             type : 'POST',
             'data': function(data){
              }

@@ -29,29 +29,29 @@
 
                     <div class="form-group col-md-6">
                         <label for="Type">Type</label>
-                        <select class="form-control" name="client_type" id="type">
-                            <option value="">Select Client Type</option>
+                        <select class="form-control" name="customer_type" id="type">
+                            <option value="">Select Customer Type</option>
 
-                            @foreach($client_type_section as $key => $value)
+                            @foreach($customer_type_section as $key => $value)
                             <option value="{{$value->type_name}}">{{$value->type_name}}</option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="client_name">Name</label>
-                        <input type="text" class="form-control" name="client_name" id="client_name" placeholder="Customer Name">
+                        <label for="customer_name">Name</label>
+                        <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Customer Name">
                     </div>
 
 
                     <div class="form-group col-md-6">
                         <label for="Name">Email</label>
-                        <input type="text" class="form-control" name="client_email" id="client_email" placeholder="Email">
+                        <input type="text" class="form-control" name="customer_email" id="customer_email" placeholder="Email">
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="client_phone">Phone</label>
-                        <input id="client_phone" class="form-control" name="client_phone" type="tel">
+                        <label for="customer_phone">Phone</label>
+                        <input id="customer_phone" class="form-control" name="customer_phone" type="tel">
                         <span id="valid-msg" class="hide">✓ Valid</span>
                         <span id="error-msg" class="hide"></span>
                     </div>
@@ -75,8 +75,8 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="client_address">Address</label>
-                        <input id="client_address" class="form-control" name="client_address">
+                        <label for="customer_address">Address</label>
+                        <input id="customer_address" class="form-control" name="customer_address">
                     </div>
 
                     <!--Hiden Input-->
@@ -86,7 +86,7 @@
                     <input type="hidden" name="state_id" id="state_id">
                     <!--Hiden Input-->
 
-                    @foreach($all_client_custom_field as $key => $row)
+                    @foreach($all_customer_custom_field as $key => $row)
 
                     <div class="form-group col-md-6">
                         <label for="{{$row->field_key}}">{{$row->field_label}}</label>
@@ -104,7 +104,7 @@
 </div>
 
 <script>
-    var input = document.querySelector("#client_phone");
+    var input = document.querySelector("#customer_phone");
     var errorMsg = document.querySelector("#error-msg");
     var validMsg = document.querySelector("#valid-msg");
     // here, the index maps to the error code returned from getValidationError - see readme
@@ -149,7 +149,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             method: "POST",
-            url: "{{url("clients")}}",
+            url: "{{url("customers")}}",
             data: data,
             cache: false,
             contentType: false,
@@ -159,7 +159,7 @@
             }
         }).done(function () {
             $("#success_msg").html("Data Save Successfully");
-            window.location.href = "{{ url('clients')}}";
+            window.location.href = "{{ url('customers')}}";
             // window.location.reload();
         }).fail(function (data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);
