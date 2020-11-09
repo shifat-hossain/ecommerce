@@ -70,7 +70,7 @@
                         <label for="type_section">Type Section</label>
                         <select style="width: 100%" name="type_section" id="type_section" class="form-control select2 dynamic">
                             <option value="">Select Section</option>
-                            <option value="CLIENT">Client</option>
+                            <option value="CUSTOMER">Customer</option>
                             <option value="VENDOR">Vendor</option>
                             <option value="USER">User</option>
                         </select>
