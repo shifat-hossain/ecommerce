@@ -90,12 +90,12 @@
         },
         columns: [
             { data: 'sl' },
-            { data: 'client_name' },
-            { data: 'client_phone' },
-            { data: 'client_email' },
+            { data: 'customer_name' },
+            { data: 'customer_phone' },
+            { data: 'customer_email' },
             { data: 'country_name' },
             { data: 'state_name' },
-            { data: 'client_status' },
+            { data: 'customer_status' },
             { data: 'action' },
         ]
         

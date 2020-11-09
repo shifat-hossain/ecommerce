@@ -26,52 +26,52 @@ Auth::routes([
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
 
 
-Route::post('vendor-list', 'VendorController@vendor_list')->middleware('auth');
-Route::resource('vendors', 'VendorController')->middleware('auth');
+Route::post('vendor-list', 'Admin\VendorController@vendor_list')->middleware('auth');
+Route::resource('vendors', 'Admin\VendorController')->middleware('auth');
 
-Route::resource('roles', 'RoleController')->middleware('auth');
-Route::resource('permissions', 'PermissionController')->middleware('auth');
-Route::resource('users', 'UserController')->middleware('auth');
-Route::post('user-list', 'UserController@user_list')->middleware('auth');
+Route::resource('roles', 'Admin\RoleController')->middleware('auth');
+Route::resource('permissions', 'Admin\PermissionController')->middleware('auth');
+Route::resource('users', 'Admin\UserController')->middleware('auth');
+Route::post('user-list', 'Admin\UserController@user_list')->middleware('auth');
 
-Route::resource('customers', 'CustomerController')->middleware('auth');
-Route::post('customer-list', 'CustomerController@customer_list')->middleware('auth');
-Route::post('change-customer-status/{id}', 'CustomerController@change_status')->middleware('auth');
+Route::resource('customers', 'Admin\CustomerController')->middleware('auth');
+Route::post('customer-list', 'Admin\CustomerController@customer_list')->middleware('auth');
+Route::post('change-customer-status/{id}', 'Admin\CustomerController@change_status')->middleware('auth');
 
-Route::resource('custom-fields', 'CustomFieldController')->middleware('auth');
-Route::post('change-fields-status/{id}', 'CustomFieldController@change_status')->middleware('auth');
+Route::resource('custom-fields', 'Admin\CustomFieldController')->middleware('auth');
+Route::post('change-fields-status/{id}', 'Admin\CustomFieldController@change_status')->middleware('auth');
 
-Route::resource('categories', 'CategoryController')->middleware('auth');
-Route::resource('brands', 'BrandController')->middleware('auth');
-Route::resource('sliders', 'SliderController')->middleware('auth');
-Route::resource('attributes', 'AttributeController')->middleware('auth');
-Route::resource('products', 'ProductController')->middleware('auth');
-Route::post('products/upload', 'ProductController@upload')->name('products.upload');
+Route::resource('categories', 'Admin\CategoryController')->middleware('auth');
+Route::resource('brands', 'Admin\BrandController')->middleware('auth');
+Route::resource('sliders', 'Admin\SliderController')->middleware('auth');
+Route::resource('attributes', 'Admin\AttributeController')->middleware('auth');
+Route::resource('products', 'Admin\ProductController')->middleware('auth');
+Route::post('products/upload', 'Admin\ProductController@upload')->name('products.upload');
 
 //Get Attribute Group By Id
-Route::post('fetch-attribute-group/{any}', 'AttributeController@fetch_attribute_group')->middleware('auth');
+Route::post('fetch-attribute-group/{any}', 'Admin\AttributeController@fetch_attribute_group')->middleware('auth');
 //Get Attribute Group By Id
 //
 //Delete Attribute  By Id
-Route::delete('delete-attribute/{any}', 'AttributeController@delete_attribute')->middleware('auth');
+Route::delete('delete-attribute/{any}', 'Admin\AttributeController@delete_attribute')->middleware('auth');
 //Delete Attribute By Id
 //
 //update Attribute By Id
-Route::post('attributes-update/{any}', 'AttributeController@attributes_update')->middleware('auth');
+Route::post('attributes-update/{any}', 'Admin\AttributeController@attributes_update')->middleware('auth');
 //Update Attribute By Id
 //
 //Upload Summernote Image
-Route::post('summurnote-image-upload', 'AttributeController@summurnote_image_upload')->middleware('auth');
+Route::post('summurnote-image-upload', 'Admin\AttributeController@summurnote_image_upload')->middleware('auth');
 //Upload Summernote Image
 
-Route::resource('types', 'TypeController')->middleware('auth');
-Route::resource('units', 'UnitController')->middleware('auth');
+Route::resource('types', 'Admin\TypeController')->middleware('auth');
+Route::resource('units', 'Admin\UnitController')->middleware('auth');
 
 //Get states by country id
-Route::get('get-states/{any}','CustomerController@get_states');
+Route::get('get-states/{any}','Admin\CustomerController@get_states');
 //Get states by country id
 
 
