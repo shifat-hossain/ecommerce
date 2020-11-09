@@ -30,22 +30,27 @@
 
                     @method('PUT')
 
-                    <div class="form-group col-md-6">
-                        <label for="Type">Type</label>
-                        <select class="form-control" name="customer_type" id="type">
-                            <option value="">Select Customer Type</option>
+                    <!--                    <div class="form-group col-md-6">
+                                            <label for="Type">Type</label>
+                                            <select class="form-control" name="customer_type" id="type">
+                                                <option value="">Select Customer Type</option>
+                    
+                                                @foreach($customer_type_section as $key => $value)
+                                                <option value="{{$value->type_name}}" @if($value->type_name == $customer_info->customer_type) selected @endif>{{$value->type_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>-->
 
-                            @foreach($customer_type_section as $key => $value)
-                            <option value="{{$value->type_name}}" @if($value->type_name == $customer_info->customer_type) selected @endif>{{$value->type_name}}</option>
-                            @endforeach
-                        </select>
+                    <div class="form-group col-md-6">
+                        <label for="customer_first_name">First Name</label>
+                        <input type="text" class="form-control" name="customer_first_name" value="{{$customer_info->customer_first_name}}" id="customer_first_name" placeholder="Customer Name">
+                        <input type="hidden" class="form-control" name="id" value="{{$customer_info->id}}" id="id" placeholder="Customer Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="customer_last_name">Last Name</label>
+                        <input type="text" class="form-control" name="customer_last_name" id="customer_last_name" value="{{$customer_info->customer_last_name}}" placeholder="Customer Name">
                     </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="customer_name">Name</label>
-                        <input type="hidden" name="id"  value="{{$customer_info->id}}" id="customer_id">
-                        <input type="text" class="form-control" value="{{$customer_info->customer_name}}" name="customer_name" id="customer_name" placeholder="Customer Name">
-                    </div>
 
 
                     <div class="form-group col-md-6">
@@ -79,12 +84,29 @@
                             @endforeach
                         </select>
                     </div>
-                   
+
                     <div class="form-group col-md-6">
+                        <label for="customer_postal_code">Postal Code</label>
+                        <input id="customer_postal_code" value="{{$customer_info->customer_postal_code}}" class="form-control" name="customer_postal_code">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="customer_code">Code</label>                     
+                        <input type="text" class="form-control" value="{{$customer_info->customer_code}}" name="customer_code" id="customer_code" value="#customer-code123" placeholder="Customer Name">
+                    </div>
+                    <div class="form-group col-md-12">
                         <label for="customer_address">Address</label>
-                        <input id="customer_address" value="{{$customer_info->customer_address}}" class="form-control" name="customer_address">
+                        <textarea class="form-control" name="customer_address" id="customer_address" rows="3" placeholder="Enter ...">{{$customer_info->customer_address}}</textarea>
+
                     </div>
 
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input id="password" class="form-control" name="password">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input id="confirm_password" class="form-control" name="confirm_password">
+                    </div>
                     <?php
                     $arry = $customer_info->toArray();
                     ?>
@@ -98,6 +120,12 @@
                     @endforeach
 
                 </div>
+                 <!--Hiden Input-->
+                    <input type="hidden" name="country_name" id="country_name" value="{{$customer_info->country_name}}">
+                    <input type="hidden" name="country_id" id="country_id" value="{{$customer_info->country_id}}">
+                    <input type="hidden" name="state_name" id="state_name" value="{{$customer_info->state_name}}">
+                    <input type="hidden" name="state_id" id="state_id" value="{{$customer_info->state_id}}">
+                    <!--Hiden Input-->
 
                 <button type="button" id="edit_btn" class="btn btn-primary">Submit</button>
             </form>
@@ -176,12 +204,15 @@
 
 
     //    Get States by country
-    
+
     function getStates(string)
     {
         var splitted = string.split('|');
         var id = splitted.shift();
-              
+        var country_name = splitted.join(',');
+        $('#country_id').val(id);
+        $('#country_name').val(country_name);
+
         $.ajax({
             url: "{{url('get-states')}}/" + id,
             success: function (response) {
