@@ -32,7 +32,7 @@
                         <label for="field_section">Field Section</label>
                         <select class="form-control" name="field_section" id="field_section">
                             <option value="">Select Field Section</option>
-                            <option value="clients">Client</option>
+                            <option value="customers">Customer</option>
                             <option value="vendors">Vendor</option>
                         </select>
                     </div>

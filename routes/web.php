@@ -71,7 +71,7 @@ Route::resource('types', 'TypeController')->middleware('auth');
 Route::resource('units', 'UnitController')->middleware('auth');
 
 //Get states by country id
-Route::get('get-states/{any}','ClientController@get_states');
+Route::get('get-states/{any}','CustomerController@get_states');
 //Get states by country id
 
 

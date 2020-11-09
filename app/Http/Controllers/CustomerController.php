@@ -136,7 +136,7 @@ class CustomerController extends Controller {
         $data['customer_id'] = 'clt#5548564';
         $data['all_customer_custom_field'] = CustomField::where('field_section', 'customers')->where('field_status', 'ACTIVE')->get();
 
-        $data['customer_type_section'] = Type::where('type_section', 'CLIENT')->get();
+        $data['customer_type_section'] = Type::where('type_section', 'CUSTOMER')->get();
         $data['all_countries'] = Country::all();
         return view("admin.customer.add_customer", $data);
     }
