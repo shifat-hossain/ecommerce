@@ -4,7 +4,7 @@
 <div class="col-12">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">All Units</h4>
+            <h4 class="card-title">All Unit</h4>
 
             <div class="card-tools">
                 <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#add_modal" > <i class="fas fa-plus-circle"></i> Add New Unit</button>

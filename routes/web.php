@@ -37,9 +37,9 @@ Route::resource('permissions', 'PermissionController')->middleware('auth');
 Route::resource('users', 'UserController')->middleware('auth');
 Route::post('user-list', 'UserController@user_list')->middleware('auth');
 
-Route::resource('clients', 'ClientController')->middleware('auth');
-Route::post('client-list', 'ClientController@client_list')->middleware('auth');
-Route::post('change-client-status/{id}', 'ClientController@change_status')->middleware('auth');
+Route::resource('customers', 'CustomerController')->middleware('auth');
+Route::post('customer-list', 'CustomerController@customer_list')->middleware('auth');
+Route::post('change-customer-status/{id}', 'CustomerController@change_status')->middleware('auth');
 
 Route::resource('custom-fields', 'CustomFieldController')->middleware('auth');
 Route::post('change-fields-status/{id}', 'CustomFieldController@change_status')->middleware('auth');
@@ -68,7 +68,7 @@ Route::post('summurnote-image-upload', 'AttributeController@summurnote_image_upl
 //Upload Summernote Image
 
 Route::resource('types', 'TypeController')->middleware('auth');
-Route::resource('units', 'UnitsController')->middleware('auth');
+Route::resource('units', 'UnitController')->middleware('auth');
 
 //Get states by country id
 Route::get('get-states/{any}','ClientController@get_states');
