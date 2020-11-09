@@ -42,7 +42,6 @@ class SliderController extends Controller
         $request->validate([
             'slider_title' => 'required|max:255',
             'slider_text' => 'required',
-            'slider_tag' => 'required|max:100',
             'slider_image' => 'required|file|image|mimes:jpg,jpeg,png,gif,webp|max:2048'
         ]);
 
@@ -94,7 +93,7 @@ class SliderController extends Controller
         $request->validate([
             'slider_title' => 'required|max:255',
             'slider_text' => 'required',
-            'slider_tag' => 'required|max:100',
+//            'slider_tag' => 'required|max:100',
             'slider_image' => 'file|image|mimes:jpg,jpeg,png,gif,webp|max:2048'
         ]);
 

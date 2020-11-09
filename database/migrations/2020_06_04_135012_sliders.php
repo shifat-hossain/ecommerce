@@ -18,7 +18,7 @@ class Sliders extends Migration
             $table->text('slider_image');
             $table->string('slider_title', 255);
             $table->text('slider_text');
-            $table->string('slider_tag', 100);
+            $table->string('slider_tag', 100)->nullable();
             $table->timestamps();
         });
     }
