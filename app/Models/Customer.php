@@ -15,7 +15,7 @@ class Customer extends Model
 
     //public $timestamps = false;
 
-    public static function updateClientData($id,$data){
+    public static function updateCustomerData($id,$data){
     	DB::table('customers')
     	->where('id', $id)
     	->update($data);

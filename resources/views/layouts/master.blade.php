@@ -400,12 +400,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             }
                                             },
                                     });
-                                    });
+                                    });                                  
                                     $.upload = function (file) {
                                     let out = new FormData();
                                     out.append('file', file, file.name);
                                     let image = file.name;
-//console.log(out);
                                     console.log(file.name);
                                     $.ajax({
                                     headers: {
@@ -418,7 +417,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             processData: false,
                                             data: out,
                                             success: function (img) {
-                                            $('#summernote').summernote('insertImage', img);
+                                            var image = $('<img>').attr('src', img);
+                                            console.log(image);
+                                            $('#summernote').summernote('insertNode', image[0]);
+                                            },
+                                            error: function (jqXHR, textStatus, errorThrown) {
+                                            console.error(textStatus + " " + errorThrown);
+                                            }
+                                    });
+                                    };
+
+                                    $.upload = function (file) {
+                                    let out = new FormData();
+                                    out.append('file', file, file.name);
+                                    let image = file.name;
+                                    console.log(file.name);
+                                    $.ajax({
+                                    headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                            method: 'POST',
+                                            url: '{{url('summurnote-image-upload')}}',
+                                            contentType: false,
+                                            cache: false,
+                                            processData: false,
+                                            data: out,
+                                            success: function (img) {
+                                            var image = $('<img>').attr('src', img);
+                                            console.log(image);
+                                            $('#summernote1').summernote('insertNode', image[0]);
                                             },
                                             error: function (jqXHR, textStatus, errorThrown) {
                                             console.error(textStatus + " " + errorThrown);

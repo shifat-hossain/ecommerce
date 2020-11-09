@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Attribute;
@@ -147,7 +148,8 @@ class AttributeController extends Controller {
     public function summurnote_image_upload(Request $request)
     {
      
-          $request->file('file')->store('summernote');
+        $path = $request->file('file')->store('summernote');
+        return url('/').'/storage/app/'.$path;
     }
 
 }

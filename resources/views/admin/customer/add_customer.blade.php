@@ -27,20 +27,25 @@
             <form id="add_form" autocomplete="off">
                 <div class="form-row">
 
-                    <div class="form-group col-md-6">
-                        <label for="Type">Type</label>
-                        <select class="form-control" name="customer_type" id="type">
-                            <option value="">Select Customer Type</option>
+                    <!--                    <div class="form-group col-md-6">
+                                            <label for="Type">Type</label>
+                                            <select class="form-control" name="customer_type" id="type">
+                                                <option value="">Select Customer Type</option>
+                    
+                                                @foreach($customer_type_section as $key => $value)
+                                                <option value="{{$value->type_name}}">{{$value->type_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>-->
 
-                            @foreach($customer_type_section as $key => $value)
-                            <option value="{{$value->type_name}}">{{$value->type_name}}</option>
-                            @endforeach
-                        </select>
+                    <div class="form-group col-md-6">
+                        <label for="customer_first_name">First Name</label>
+                        <input type="text" class="form-control" name="customer_first_name" id="customer_first_name" placeholder="Customer Name">
                     </div>
-
                     <div class="form-group col-md-6">
-                        <label for="customer_name">Name</label>
-                        <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Customer Name">
+                        <label for="customer_last_name">Last Name</label>
+                        <input type="text" class="form-control" name="customer_last_name" id="customer_last_name" placeholder="Customer Name">
+
                     </div>
 
 
@@ -75,8 +80,26 @@
                     </div>
 
                     <div class="form-group col-md-6">
+                        <label for="customer_postal_code">Postal Code</label>
+                        <input id="customer_postal_code" class="form-control" name="customer_postal_code">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="customer_code">Code</label>                     
+                        <input type="text" class="form-control" name="customer_code" id="customer_code" value="#customer-code123" placeholder="Customer Name">
+                    </div>
+                    <div class="form-group col-md-12">
                         <label for="customer_address">Address</label>
-                        <input id="customer_address" class="form-control" name="customer_address">
+                        <textarea class="form-control" name="customer_address" id="customer_address" rows="3" placeholder="Enter ..."></textarea>
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input id="password" class="form-control" name="password">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input id="confirm_password" class="form-control" name="confirm_password">
                     </div>
 
                     <!--Hiden Input-->
@@ -194,7 +217,7 @@
         $('#state_id').val(id);
         $('#state_name').val(state_name);
     });
-    
+
 </script>
 
 

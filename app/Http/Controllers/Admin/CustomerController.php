@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
@@ -132,7 +133,7 @@ class CustomerController extends Controller {
         if (!Auth::user()->can('add-customer')) {
             return view("not_allow");
         }
-        
+
         $data['customer_id'] = 'clt#5548564';
         $data['all_customer_custom_field'] = CustomField::where('field_section', 'customers')->where('field_status', 'ACTIVE')->get();
 
@@ -178,15 +179,42 @@ class CustomerController extends Controller {
             }
         }
 
-        $validationArray['customer_name'] = 'required';
-        $validationArray['customer_type'] = 'required';
+        $validationArray['customer_first_name'] = 'required';
+        $validationArray['country'] = 'required';
+        $validationArray['state_name'] = 'required';
+        $validationArray['customer_last_name'] = 'required';
+        $validationArray['password'] = 'min:6|required_with:confirm_password';
+        $validationArray['confirm_password'] = 'min:6|required|same:password';
+
+//        $validationArray['customer_type'] = 'required';
         $validationArray['customer_email'] = 'required|unique:customers|email';
         $validationArray['customer_phone'] = 'required|unique:customers';
 
 
         $this->validate($request, $validationArray);
+        $data['customer_first_name'] = $request->input('customer_first_name');
+        $data['customer_code'] = $request->input('customer_code');
+        $data['customer_last_name'] = $request->input('customer_last_name');
+        $data['customer_postal_code'] = $request->input('customer_postal_code');
+        $data['customer_email'] = $request->input('customer_email');
+        $data['customer_phone'] = $request->input('customer_phone');
+        $data['customer_address'] = $request->input('customer_address');
+        $data['password'] = \Illuminate\Support\Facades\Hash::make($request->input('password'));
+//        $data['customer_type'] = $request->input('customer_type');
 
-        Customer::insert($request->all());
+
+
+        $data['customer_status'] = 1;
+        $data['country_id'] = $request->country_id;
+        $data['country_name'] = $request->country_name;
+        $data['state_id'] = $request->state_id;
+        $data['state_name'] = $request->state_name;
+
+        foreach ($all_customer_custom_field as $key => $row) {
+            $data[$row['field_key']] = $request->input($row['field_key']);
+        }
+
+        Customer::insert($data);
     }
 
     /**
@@ -215,10 +243,9 @@ class CustomerController extends Controller {
         $data['customer_info'] = Customer::find($id);
 
         $data['customer_type_section'] = Type::where('type_section', 'CLIENT')->get();
-
         //echo "<pre>";print_r($data['customer_info']);die();
-        $data['all_countries'] = Country::all();
-        $data['all_states'] = State::where('country_id',$data['customer_info']->country_id)->get();
+        $data['all_countries'] = Country::where('id', $data['customer_info']->country_id)->get();
+        $data['all_states'] = State::where('id', $data['customer_info']->state_id)->get();
 //           echo '<pre>';
 //           print_r($data['all_states']);die;
         return view("admin.customer.edit_customer", $data);
@@ -243,29 +270,38 @@ class CustomerController extends Controller {
             }
         }
 
-        $validationArray['customer_name'] = 'required';
+        $validationArray['customer_first_name'] = 'required';
+        $validationArray['customer_last_name'] = 'required';
+        if ($request->password != null) {
+            $validationArray['password'] = 'min:6|required_with:confirm_password';
+            $validationArray['confirm_password'] = 'min:6|required|same:password';
+        }
+        $validationArray['country'] = 'required';
+        $validationArray['state_name'] = 'required';
         $validationArray['customer_email'] = 'required';
         $validationArray['customer_phone'] = 'required';
-        $validationArray['customer_type'] = 'required';
+//        $validationArray['customer_type'] = 'required';
 
 
         $this->validate($request, $validationArray);
 
-        $data['customer_name'] = $request->input('customer_name');
+        $data['customer_first_name'] = $request->input('customer_first_name');
+        $data['customer_code'] = $request->input('customer_code');
+        $data['customer_last_name'] = $request->input('customer_last_name');
+        $data['customer_postal_code'] = $request->input('customer_postal_code');
         $data['customer_email'] = $request->input('customer_email');
         $data['customer_phone'] = $request->input('customer_phone');
         $data['customer_address'] = $request->input('customer_address');
-        $data['customer_type'] = $request->input('customer_type');
+        if ($request->password != null) {
+            $data['password'] = \Illuminate\Support\Facades\Hash::make($request->input('password'));
+        }
 
-
-        $str = $request->country;
-        $arr = explode('|', $str, 2);
-        $data['country_id'] = $arr[0];
-        $data['country_name'] = $arr[1];
-        $string = $request->state;
-        $array = explode('|', $string, 2);
-        $data['state_id'] = $array[0];
-        $data['state_name'] = $array[1];
+//        $data['customer_type'] = $request->input('customer_type');
+        $data['customer_status'] = 1;
+        $data['country_id'] = $request->country_id;
+        $data['country_name'] = $request->country_name;
+        $data['state_id'] = $request->state_id;
+        $data['state_name'] = $request->state_name;
 
         foreach ($all_customer_custom_field as $key => $row) {
             $data[$row['field_key']] = $request->input($row['field_key']);
