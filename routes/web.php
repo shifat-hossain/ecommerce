@@ -26,7 +26,7 @@ Auth::routes([
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('auth');
 
 
 Route::post('vendor-list', 'VendorController@vendor_list')->middleware('auth');

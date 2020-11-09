@@ -40,8 +40,10 @@
                             <a href="javascript:void(0)" class="sidebar-overlay" onclick="closeNav()"></a>
                             <nav>
                                 <div onclick="closeNav()">
-                                    <div class="sidebar-back text-left"><i class="fa fa-angle-left pr-2"
-                                                                           aria-hidden="true"></i> Back</div>
+                                    <div class="sidebar-back text-left">
+                                        <i class="fa fa-angle-left pr-2" aria-hidden="true"></i> 
+                                        Back
+                                    </div>
                                 </div>
                                 <ul id="sub-menu" class="sm pixelstrap sm-vertical">
                                     <li> <a href="#">clothing</a>
@@ -179,8 +181,10 @@
                             <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
                             <ul id="main-menu" class="sm pixelstrap sm-horizontal">
                                 <li>
-                                    <div class="mobile-back text-right">Back<i class="fa fa-angle-right pl-2"
-                                                                               aria-hidden="true"></i></div>
+                                    <div class="mobile-back text-right">
+                                        Back
+                                        <i class="fa fa-angle-right pl-2" aria-hidden="true"></i>
+                                    </div>
                                 </li>
                                 <li>
                                     <a href="#">Home</a>

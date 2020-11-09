@@ -1192,11 +1192,11 @@
     /*=====================
      20. Color Picker
      ==========================*/
-    var color_picker1 = document.getElementById("ColorPicker1").value;
-    document.getElementById("ColorPicker1").onchange = function() {
-        color_picker1 = this.value;
-        document.documentElement.style.setProperty('--theme-deafult', color_picker1);
-    };
+//    var color_picker1 = document.getElementById("ColorPicker1").value;
+//    document.getElementById("ColorPicker1").onchange = function() {
+//        color_picker1 = this.value;
+//        document.documentElement.style.setProperty('--theme-deafult', color_picker1);
+//    };
 
 
 })(jQuery);
@@ -1222,12 +1222,12 @@ $(".color-box li").click(function() {
 
 // dark & light
 (function() {
-    $('<div class="sidebar-btn dark-light-btn">' +
-        '<div class="dark-light">' +
-        '<div class="theme-layout-version">Dark' +
-        '</div>' +
-        '</div>' +
-        '</div>').appendTo($('body'));
+//    $('<div class="sidebar-btn dark-light-btn">' +
+//        '<div class="dark-light">' +
+//        '<div class="theme-layout-version">Dark' +
+//        '</div>' +
+//        '</div>' +
+//        '</div>').appendTo($('body'));
 })();
 
 var body_event = $("body");

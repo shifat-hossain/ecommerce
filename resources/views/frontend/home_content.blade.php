@@ -6,6 +6,8 @@
 
 <!-- Home slider -->
 <section class="p-0">
+    
+    @isset($all_slider)
     <div class="slide-1 home-slider">
         
         @foreach($all_slider as $slider)
@@ -33,6 +35,7 @@
         @endforeach
         
     </div>
+    @endisset
 </section>
 <!-- Home slider end -->
 
