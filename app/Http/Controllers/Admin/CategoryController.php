@@ -67,32 +67,40 @@ class CategoryController extends Controller {
             'category_menu_image' => 'required|file|image|mimes:jpg,jpeg,png,gif,webp|max:2048'
         ]);
 
+        $response['status'] = 'Error';
+        
         $category->category_name = $request->category_name;
         $category->slug = $request->category_slug;
         $category->parent_id = $request->parent_id;
-        $cover_photo = $request->file('category_cover_image')->store('category_cover');
-        $menu_photo = $request->file('category_menu_image')->store('category_menu');
+        
+        $cover_photo = $request->file('category_cover_image')->store('category/category_cover');
+        $menu_photo = $request->file('category_menu_image')->store('category/category_menu');
+        
         $category->category_cover_image = $cover_photo;
         $category->category_menu_image = $menu_photo;
         
 //     Start   Category Thumbnail
-        
-        $file = $request->file('category_cover_image');
-        $file_name = time() . '.' . $request->category_cover_image->extension();
-        $destinationPath = 'storage/app/category_thumbnail/';
-        $thumb_img = Image::make($file->getRealPath())->resize(400, 300);
-        $thumb_img->save($destinationPath . $file_name, 80);   
-        
-        
-//     End   Category Thumbnail
+        $file = $request->file('category_cover_image')->hashName();
+        $resize = Image::make($request->file('category_cover_image'))->resize(600, 200, function ($constraint) {
+                    
+                })->encode('jpg');
 
-        $category->category_thumbnail = 'category_thumbnail/' . $file_name;
+        // Put image to storage
+        Storage::put("category/category_thumbnail/{$file}", $resize->__toString());
+//     End   Category Thumbnail
+        
+        $category->category_thumbnail = 'category_thumbnail/' . $file;
         $category->category_description = $request->category_description;
         $category->meta_title = $request->category_meta_title;
         $category->meta_description = $request->category_meta_description;
         $category->meta_keywords = $request->category_meta_keywords;
         $category->save();
-        return redirect('categories');
+        
+        if(isset($category->id)) {
+            $response['status'] = 'Success';
+        }
+        
+        echo json_encode($response);
     }
 
     public function show($id) {
@@ -129,16 +137,24 @@ class CategoryController extends Controller {
         $category->slug = $request->category_slug;
         $category->parent_id = $request->parent_id;
         if ($request->hasFile('category_cover_image')) {
-            if (File::exists('storage/app/' . $category->category_cover_image)) {
-                File::delete('storage/app/' . $category->category_cover_image);
+            if (File::exists('storage/app/category/' . $category->category_cover_image)) {
+                File::delete('storage/app/category/' . $category->category_cover_image);
+                File::delete('storage/app/category/' . $category->category_thumbnail);
             }
             $cover_photo = $request->file('category_cover_image')->store('category_cover');
             $category->category_cover_image = $cover_photo;
-            $category->category_thumbnail = $cover_photo;
+            
+            $file = $request->file('category_cover_image')->hashName();
+            $resize = Image::make($request->file('category_cover_image'))->resize(600, 200, function ($constraint) {
+
+                    })->encode('jpg');
+            
+            Storage::put("category/category_thumbnail/{$file}", $resize->__toString());
+            $category->category_thumbnail = 'category_thumbnail/' . $file;
         }
         if ($request->hasFile('category_menu_image')) {
-            if (File::exists('storage/app/' . $category->category_menu_image)) {
-                File::delete('storage/app/' . $category->category_menu_image);
+            if (File::exists('storage/app/category/' . $category->category_menu_image)) {
+                File::delete('storage/app/category/' . $category->category_menu_image);
             }
             $menu_photo = $request->file('category_menu_image')->store('category_menu');
             $category->category_menu_image = $menu_photo;
@@ -148,7 +164,9 @@ class CategoryController extends Controller {
         $category->meta_title = $request->category_meta_title;
         $category->meta_description = $request->category_meta_description;
         $category->meta_keywords = $request->category_meta_keywords;
+        
         $category->save();
+        
         echo json_encode("Done");
     }
 

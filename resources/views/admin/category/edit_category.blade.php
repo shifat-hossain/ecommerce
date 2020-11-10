@@ -36,9 +36,6 @@
                         <input type="text" onkeyup="makeSlug(this.value)" class="form-control" name="category_name" id="category_name" value="{{$category_data->category_name}}"  placeholder="Category Name">
                         <!--<input type="text" class="form-control" name="category_name" id="category_name" value="{{$category_data->category_name}}" placeholder="Enter Name">-->
                         <input type="hidden" value="{{$category_data->id}}" id="category_id">
-                        @error('category_name')
-                        <p style="color: red">{{$message}}</p>
-                        @enderror
                     </div>
 
                     <div class="form-group col-md-6">
@@ -48,52 +45,50 @@
                             @foreach($all_category as $row)
                             <option value="{{ $row->id }}" @if($row->id == $category_data->parent_id) selected @endif>
                                     {{ $row->category_name }}
-                        </option>
-                        @endforeach
-                    </select>
-                </div>               
-
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
 
                 <div class="form-group col-md-6">
                     <label for="Slug">Slug</label>
                     <input type="text"  value="{{$category_data->slug}}" class="form-control" name="category_slug" id="category_slug" placeholder="Slug">
                 </div>
 
-
-
                 <div class="form-group col-md-6">
                     <label for="category_cover_image">Cover Image</label>
                     <input type="file" id="category_cover_image" name="category_cover_image" class="form-control" >
-                    @error('category_cover_image')
-                    <p style="color: red">{{$message}}</p>
-                    @enderror
                 </div>
+                    
                 <div class="form-group col-md-6">
                     <label for="category_menu_image">Menu Image</label>
                     <input type="file" id="category_menu_image" name="category_menu_image" class="form-control" >
-                    @error('category_menu_image')
-                    <p style="color: red">{{$message}}</p>
-                    @enderror
                 </div>
+                    
                 <div class="form-group col-md-6">
                     <label for="category_meta_title">Meta Title</label>
                     <input type="text" class="form-control"  value="{{$category_data->meta_title}}" name="category_meta_title" id="category_meta_title" placeholder="Meta title">
                 </div>
+                    
                 <div class="form-group col-md-6">
                     <label for="category_meta_description">Meta Description</label>
                     <input type="text" class="form-control"  value="{{$category_data->meta_description}}" name="category_meta_description" id="category_meta_description" placeholder="Meta Description">
                 </div>
+                    
                 <div class="form-group col-md-6">
                     <label for="category_meta_keywords">Meta Keywords</label>
                     <input type="text" class="form-control"  value="{{$category_data->meta_keywords}}" name="category_meta_keywords" id="category_meta_keywords" placeholder="Meta Keywords">
                 </div>
+                    
             </div>
+                
             <div class="form-group col-md-12">
                 <label for="client_phone">Description</label>
                 <textarea class="form-control" name="category_description" id="category_description" rows="5" placeholder="Category Description"> {{$category_data->category_description}}</textarea>
-
             </div>
+                
             <button type="submit" id="add_btn" class="btn btn-primary">Submit</button>
+            
         </form>
     </div>
 </div>
@@ -106,8 +101,8 @@
         let output = str.replace(/\s+/g, '-').toLowerCase();
         $('#category_slug').val(output);
     }
-</script>
-<script>
+
+
     $("#edit_form").on('submit', function (e) {
         e.preventDefault();
         $(".error_msg").html('');
