@@ -3,16 +3,16 @@
 @section('content')
 
 <style>
-    span.select2.select2-container.select2-container--default{
+    span.select2.select2-container.select2-container--default {
         width: 450px !important;
     }
-    .hide{
+    .hide {
         display: none;
     }
-    #valid-msg{
+    #valid-msg {
         color: green;
     }
-    #error-msg{
+    #error-msg {
         color: red;
     }
 </style>
@@ -24,7 +24,10 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <form id="add_form" autocomplete="off" method="post" enctype="multipart/form-data" action="{{url('categories')}}">
+            <form id="add_form" autocomplete="off">
+                
+                 <div class="alert alert-success" id="success_msg" role="alert" style="display: none;"></div>
+                
                 <div class="form-row">
                     @csrf
                     @method('POST')
@@ -32,9 +35,7 @@
                     <div class="form-group col-md-6">
                         <label for="category_name">Category Name</label>
                         <input type="text" onkeyup="makeSlug(this.value)" class="form-control" name="category_name" id="category_name" placeholder="Category Name">
-                        @error('category_name')
-                        <p style="color: red">{{$message}}</p>
-                        @enderror
+                        
                     </div>
 
                     <div class="form-group col-md-6">
@@ -49,47 +50,45 @@
                         </select>
                     </div>
 
-
                     <div class="form-group col-md-6">
                         <label for="Slug">Slug</label>
                         <input type="text" class="form-control" name="category_slug" id="category_slug" placeholder="Slug">
                     </div>
 
-
-
                     <div class="form-group col-md-6">
                         <label for="category_cover_image">Cover Image</label>
                         <input type="file" id="category_cover_image" name="category_cover_image" class="form-control" >
-                        @error('category_cover_image')
-                        <p style="color: red">{{$message}}</p>
-                        @enderror
                     </div>
+                    
                     <div class="form-group col-md-6">
                         <label for="category_menu_image">Menu Image</label>
                         <input type="file" id="category_menu_image" name="category_menu_image" class="form-control" >
-                        @error('category_menu_image')
-                        <p style="color: red">{{$message}}</p>
-                        @enderror
                     </div>
+                    
                     <div class="form-group col-md-6">
                         <label for="category_meta_title">Meta Title</label>
                         <input type="text" class="form-control" name="category_meta_title" id="category_meta_title" placeholder="Meta title">
                     </div>
+                    
                     <div class="form-group col-md-6">
                         <label for="category_meta_description">Meta Description</label>
                         <input type="text" class="form-control" name="category_meta_description" id="category_meta_description" placeholder="Meta Description">
                     </div>
+                    
                     <div class="form-group col-md-6">
                         <label for="category_meta_keywords">Meta Keywords</label>
                         <input type="text" class="form-control" name="category_meta_keywords" id="category_meta_keywords" placeholder="Meta Keywords">
                     </div>
+                    
                 </div>
+                
                 <div class="form-group col-md-12">
                     <label for="client_phone">Description</label>
                     <textarea class="form-control" name="category_description" id="category_description" rows="5" placeholder="Category Description"></textarea>
-
                 </div>
-                <button type="submit" id="add_btn" class="btn btn-primary">Submit</button>
+                
+                <button type="button" id="add_btn" class="btn btn-primary">Submit</button>
+                
             </form>
         </div>
     </div>
@@ -102,6 +101,38 @@
         let output = str.replace(/\s+/g, '-').toLowerCase();
         $('#category_slug').val(output);
     }
+    
+    $("#add_btn").click(function () {
+        $(".error_msg").html('');
+        var data = new FormData($('#add_form')[0]);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            method: "POST",
+            url: "{{url("categories")}}",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data, textStatus, jqXHR) {
+
+            }
+        }).done(function (data) {
+            var json_data = JSON.parse(data);
+            if(json_data.status == 'Success') {
+                $("#success_msg").html("Data Save Successfully");
+                $("#success_msg").show();
+                window.location.href = "{{ url('categories')}}";
+            }
+        }).fail(function (data, textStatus, jqXHR) {
+            var json_data = JSON.parse(data.responseText);
+            
+            $.each(json_data.errors, function (key, value) {
+                $("#" + key).after("<span class='error_msg' style='color: red;font-weigh: 600'>" + value + "</span>");
+            });
+        });
+    })
 </script>
 
 
