@@ -75,5 +75,6 @@ Route::resource('units', 'Admin\UnitController')->middleware('auth');
 //Get states by country id
 Route::get('get-states/{any}','Admin\CustomerController@get_states');
 //Get states by country id
+Route::get('company','Admin\AdminController@index');
 
 
