@@ -3391,6 +3391,9 @@ header {
     .bg-title .theme-tab .bg-title-part .tab-title .current a {
       color: white; }
 
+
+
+
 /*=====================
     11.Theme tab CSS start
 ==========================*/
@@ -18727,3 +18730,11 @@ body.dark {
     padding-right: 35px; }
     .collection-banner .contain-banner.banner-4 h2 {
       font-size: 15px; } }
+      .flash-wrapper img {
+        height: 300px;
+    }
+    .title-style {
+      color: #dc3545;
+      font-weight: 800;
+      text-transform: uppercase;
+  }

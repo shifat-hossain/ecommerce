@@ -679,6 +679,57 @@
 </section>
 <!-- product-box slider end -->
 
+ <section class="pt-0 banner-6 ratio2_1 section-b-space">
+         <div class="container">
+            <div class="title4">
+                    <h2 class="title-inner4">Flash Sale</h2>
+                    <div class="line"><span></span></div>
+                </div>
+            <div class="row">
+                
+                <div class="col-lg-6">
+                    <div class="border-product flash-wrapper">
+                        <div class="media">
+                            <a href="product-page(no-sidebar).html"><img class="img-fluid blur-up lazyloaded" src="{{asset('public')}}/frontend_asset/images/vegetables/pro/2.jpg" alt=""></a>
+                            <div class="media-body align-self-center">
+                                <div class="title">
+                                    <h3 class="title-style">Super Deal of the month</h3>
+                                </div>
+                         <h6>Meat</h6>
+                         <h3><a href="#">Beef Stew Meat</a></h3>
+                         <h4>$500.00 <del>$600.00</del></h4>
+                            <div class="timer">
+                                <p id="timer">
+                                </p>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="border-product flash-wrapper">
+                        <div class="media">
+                            <a href="product-page(no-sidebar).html"><img class="img-fluid blur-up lazyloaded" src="{{asset('public')}}/frontend_asset/images/vegetables/pro/2.jpg" alt=""></a>
+                            <div class="media-body align-self-center">
+                                <div class="title">
+                                    <h3 class="title-style">Super Deal of the month</h3>
+                                </div>
+                         <h6>Meat</h6>
+                         <h3><a href="#">Beef Stew Meat</a></h3>
+                         <h4>$500.00 <del>$600.00</del></h4>
+                            <div class="timer">
+                                <p id="timer2">
+                                </p>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+     </section>
+
 <section class="pt-0 banner-6 ratio2_1 section-b-space">
     <div class="container">
         <div class="row partition3">
