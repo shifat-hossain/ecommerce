@@ -129,6 +129,7 @@ class ProductController extends Controller {
 
         $product->name = $request->name;
         $product->brand_id = $request->brand;
+        $product->vendor_id = $request->vendor;
         $product->main_category = $request->main_category;
         $product->slug = $request->slug;
         $product->sku = $request->sku;

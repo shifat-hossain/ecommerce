@@ -81,7 +81,7 @@
         }).done(function () {
             $("#success_msg").html("Data Save Successfully");
             $("#success_msg").show();
-            window.location.href = "{{ url('roles')}}";
+            window.location.href = "{{ url('admin/roles')}}";
             // location.reload();
         }).fail(function (data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);

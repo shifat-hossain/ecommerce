@@ -73,24 +73,20 @@
                     <div class="modal-body">
                         <h5 class="success_msg" style="color: green;font-weight: 600;"></h5>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Attribute Name</label>
+                            <label for="exampleInputEmail1">Attribute Group</label>
                             <select class="form-control" name="attribute_group_id" id="attribute_group_id"  onchange="getAttributeGroup()">
-                                <!--                                <option value="">Select Attribute</option>-->
                                 @foreach($all_attributes_group as $row)
                                 <option value="{{ $row->id }}" @if($row->id == $all_attributes[0]->id) selected @endif>
-                                        {{ $row->attribute_group_name }}
-                            </option>
-                            @endforeach
+                                    {{ $row->attribute_group_name }}
+                                </option>
+                                @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Attribute Value</label>
-                        <input type="text" class="form-control" name="attribute_value" id="attribute_value" placeholder="Enter Value">
+                        <label for="exampleInputEmail1">Attribute Name</label>
+                        <input type="text" class="form-control" name="attribute_name" id="attribute_value" placeholder="Enter Value">
                     </div>
-                    <!--                        <div class="form-group" id="color_div" style="display: none">
-                                                <label for="exampleInputEmail1">Color Code</label>
-                                                <input type="color" class="form-control" name="color_code" id="color_code" placeholder="Enter color code">
-                                            </div>-->
+                        
                     <div class="form-group" style="display: none" id="showColor">
                         <label for="exampleInputEmail1">Select Color</label><br>       
                         <input id="getcolorValue"  readonly>

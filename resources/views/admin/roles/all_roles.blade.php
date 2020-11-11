@@ -14,7 +14,7 @@
             <h4 class="card-title">Roles List</h4>
             
             <div class="card-tools">
-                <a href="{{url('roles/create')}}" class="btn btn-info btn-sm" >
+                <a href="{{url('admin/roles/create')}}" class="btn btn-info btn-sm" >
                     <i class="fas fa-plus-circle"></i> Add New Role
                 </a>
             </div>

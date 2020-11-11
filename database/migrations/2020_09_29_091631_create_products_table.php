@@ -23,10 +23,12 @@ class CreateProductsTable extends Migration
             $table->string('ean')->nullable();
             $table->double('price', 8, 2);
             $table->integer('quantity');
+            $table->string('unit');
             $table->text('short_description')->nullable();
             $table->longText('description')->nullable();
             $table->string('tags')->nullable();
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('vendor_id')->constrained('vendors')->onDelete('cascade');
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();

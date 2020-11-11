@@ -30,6 +30,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('user/registration', 'UserAccountController@user_registration');
 Route::post('user/store-registration', 'UserAccountController@store_registration');
+Route::get('user/profile/{any}', 'UserAccountController@user_profile');
 
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
@@ -51,45 +52,34 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::resource('customers', 'Admin\CustomerController');
     Route::post('customer-list', 'Admin\CustomerController@customer_list');
     Route::post('change-customer-status/{id}', 'Admin\CustomerController@change_status');
-
 //    Custom Field
     Route::resource('custom-fields', 'Admin\CustomFieldController');
     Route::post('change-fields-status/{id}', 'Admin\CustomFieldController@change_status');
-
 //    Categories
     Route::resource('categories', 'Admin\CategoryController');
-
 //    Brand
     Route::resource('brands', 'Admin\BrandController');
-
 //    Sliders
     Route::resource('sliders', 'Admin\SliderController');
 
 //    Attributes
     Route::resource('attributes', 'Admin\AttributeController');
-
     //Get Attribute Group By Id
     Route::post('fetch-attribute-group/{any}', 'Admin\AttributeController@fetch_attribute_group');
-
     //Delete Attribute  By Id
     Route::delete('delete-attribute/{any}', 'Admin\AttributeController@delete_attribute');
-
     //update Attribute By Id
     Route::post('attributes-update/{any}', 'Admin\AttributeController@attributes_update');
-
+    
     //Upload Summernote Image
     Route::post('summurnote-image-upload', 'Admin\AttributeController@summurnote_image_upload')->middleware('auth');
-
-//products
+//  products
     Route::resource('products', 'Admin\ProductController')->middleware('auth');
     Route::post('products/upload', 'Admin\ProductController@upload')->name('products.upload');
-
-//Types
+//  Types
     Route::resource('types', 'Admin\TypeController');
-
 //    Units
     Route::resource('units', 'Admin\UnitController');
-
 //    Company
     Route::get('company', 'Admin\AdminController@index');
     Route::post('edit-company-data', 'Admin\AdminController@edit_company_data');

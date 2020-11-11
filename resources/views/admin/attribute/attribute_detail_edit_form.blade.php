@@ -1,7 +1,7 @@
 
 <h5 class="success_msg" style="color: green;font-weight: 600;"></h5>
 <div class="form-group">
-    <label for="exampleInputEmail1">Attribute Value</label>
+    <label for="exampleInputEmail1">Attribute Name</label>
     <input type="text" class="form-control" name="attribute_name" id="edit_attribute_value" value="{{$attribute_data->attribute_name}}" placeholder="Enter Name">
     <input type="hidden" name="attribute_id" id="edit_attribute_id" value="{{$attribute_data->id}}">
 </div>
