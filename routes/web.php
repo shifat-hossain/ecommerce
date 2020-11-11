@@ -25,16 +25,14 @@ Auth::routes([
 ]);
 
 Route::get('/', 'HomeController@index')->name('home');
-//Route::get('/{any}', 'HomeController@category_product')->name('home');
+Route::get('/{any}', 'HomeController@category_product')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('user/registration', 'UserAccountController@user_registration');
 Route::post('user/store-registration', 'UserAccountController@store_registration');
 
 
-
-
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function() {
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
 
 //    Vendors
