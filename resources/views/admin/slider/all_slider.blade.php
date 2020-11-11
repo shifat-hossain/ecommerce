@@ -52,7 +52,7 @@
                                 @endif
 
                                 @if(Auth::user()->can('delete-slider'))
-                                <form method="post" action="{{url('sliders/'.$row->id)}}">
+                                <form method="post" action="{{url('admin/sliders/'.$row->id)}}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>

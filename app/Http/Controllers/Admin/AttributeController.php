@@ -117,7 +117,7 @@ class AttributeController extends Controller {
      */
     public function destroy($id) {
         AttributeGroup::find($id)->delete();
-        return redirect('attributes');
+        return redirect('admin/attributes');
     }
 
     public function fetch_attribute_group($id) {
@@ -128,7 +128,7 @@ class AttributeController extends Controller {
     public function delete_attribute($id) {
         $attribute = Attribute::find($id);
         $attribute->delete();
-        return redirect('attributes/' . $attribute->attribute_group_id . '');
+        return redirect('admin/attributes/' . $attribute->attribute_group_id . '');
     }
 
     public function attributes_update(Request $request, $id) {

@@ -86,7 +86,7 @@ class UnitController extends Controller {
      */
     public function destroy($id) {
         Unit::find($id)->delete();
-        return redirect('units');
+        return redirect('admin/units');
     }
 
 }

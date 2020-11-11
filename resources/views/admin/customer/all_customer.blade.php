@@ -15,7 +15,7 @@
 
             @if(Auth::user()->can('add-customer'))
             <div class="card-tools">
-                <a href="{{url('customers/create')}}" class="btn  btn-info btn-sm" >
+                <a href="{{url('admin/customers/create')}}" class="btn  btn-info btn-sm" >
                     <i class="fas fa-plus-circle"></i> Add New Customer
                 </a>
             </div>
@@ -83,7 +83,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url : "{{url("customer-list")}}",
+            url : "{{url("admin/customer-list")}}",
             type : 'POST',
             'data': function(data){
              }

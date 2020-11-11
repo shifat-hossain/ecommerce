@@ -43,7 +43,7 @@
                         <td>
 
                             @if(Auth::user()->can('view-attribute'))
-                            <a href="{{url('attributes/'.$row->id)}}"  class="btn btn-primary btn-sm mr-2 float-left">
+                            <a href="{{url('admin/attributes/'.$row->id)}}"  class="btn btn-primary btn-sm mr-2 float-left">
                                 View
                             </a> 
                             @endif
@@ -55,7 +55,7 @@
                             @endif
 
                             @if(Auth::user()->can('delete-attribute'))
-                            <form method="post" action="{{url('attributes/'.$row->id)}}">
+                            <form method="post" action="{{url('admin/attributes/'.$row->id)}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm float-left">Delete</button>
@@ -257,7 +257,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 method: "PUT",
-                url: "{{url('attributes')}}/" + id,
+                url: "{{url('admin/attributes')}}/" + id,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
 

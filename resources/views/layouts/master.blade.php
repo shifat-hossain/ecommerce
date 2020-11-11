@@ -90,7 +90,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                             <li class="nav-item">
-                                <a href="{{url('dashboard')}}" class="nav-link">
+                                <a href="{{url('admin/dashboard')}}" class="nav-link">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
 
                                     <p>
@@ -101,7 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             @if($user->can('view-customer'))
                             <li class="nav-item">
-                                <a href="{{url('customers')}}" class="nav-link">
+                                <a href="{{url('admin/customers')}}" class="nav-link">
                                     <i class="fas fa-users nav-icon"></i>
                                     <p>
                                         Customer
@@ -123,7 +123,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             @if($user->can('view-user'))
                             <li class="nav-item">
-                                <a href="{{url('users')}}" class="nav-link">
+                                <a href="{{url('admin/users')}}" class="nav-link">
                                     <i class="fas fa-users-cog nav-icon"></i>
                                     <p>
                                         Users
@@ -134,7 +134,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             @if($user->can('view-slider'))
                             <li class="nav-item">
-                                <a href="{{url('sliders')}}" class="nav-link">
+                                <a href="{{url('admin/sliders')}}" class="nav-link">
                                     <i class="nav-icon fas fa-sliders-h"></i>
                                     <p>
                                         Slider
@@ -157,7 +157,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     @if($user->can('view-brand'))
                                     <li class="nav-item">
-                                        <a href="{{url('brands')}}" class="nav-link">
+                                        <a href="{{url('admin/brands')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 Brand
@@ -168,7 +168,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     @if($user->can('view-category'))
                                     <li class="nav-item">
-                                        <a href="{{url('categories')}}" class="nav-link">
+                                        <a href="{{url('admin/categories')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 Category
@@ -179,7 +179,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     @if($user->can('view-attribute'))
                                     <li class="nav-item">
-                                        <a href="{{url('attributes')}}" class="nav-link">
+                                        <a href="{{url('admin/attributes')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 Attribute
@@ -190,7 +190,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     @if($user->can('view-product'))
                                     <li class="nav-item">
-                                        <a href="{{url('products')}}" class="nav-link">
+                                        <a href="{{url('admin/products')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 Product
@@ -243,7 +243,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{url('types')}}" class="nav-link">
+                                        <a href="{{url('admin/types')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 type
@@ -251,7 +251,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{url('units')}}" class="nav-link">
+                                        <a href="{{url('admin/units')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 Unit
@@ -259,7 +259,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{url('custom-fields')}}" class="nav-link">
+                                        <a href="{{url('admin/custom-fields')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 Custom Field
@@ -267,7 +267,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{url('company')}}" class="nav-link">
+                                        <a href="{{url('admin/company')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 Company Info

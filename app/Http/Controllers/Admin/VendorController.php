@@ -80,14 +80,14 @@ class VendorController extends Controller
         foreach($vendor_list as $row) {
             $action = '';
             $message = 'Are You Sure you wnat to delete';
-            $action.= "<a class='btn btn-primary btn-sm mr-2' href='admin/vendors/".$row->id."'>View</a>";
+            $action.= "<a class='btn btn-primary btn-sm mr-2' href='vendors/".$row->id."'>View</a>";
 
             if (Auth::user()->can('edit-vendor')) {
-                $action.= "<a class='btn btn-success btn-sm mr-2' href='admin/vendors/".$row->id."/edit'>Edit</a>";
+                $action.= "<a class='btn btn-success btn-sm mr-2' href='vendors/".$row->id."/edit'>Edit</a>";
             } 
             
             if (Auth::user()->can('delete-vendor')) {
-            $action.= "<form action='".route('admin.vendors.destroy', $row->id)."' method='POST' style='display: inline-block;'>"
+            $action.= "<form action='".route('vendors.destroy', $row->id)."' method='POST' style='display: inline-block;'>"
                             .csrf_field().""
                             .method_field('DELETE')."
                             <button class='btn btn-danger btn-sm' type='submit'>Delete</button>

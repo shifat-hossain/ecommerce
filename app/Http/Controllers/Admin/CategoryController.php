@@ -27,13 +27,13 @@ class CategoryController extends Controller {
         }
         $data['all_category'] = $new_array;
 //        $category = array(
-//            'categories' => array(),
+//            'admin/categories' => array(),
 //            'parent_cats' => array()
 //        );
 //        
 //        
 //        foreach ($data['all_category'] as $row) {
-//            $category['categories'][$row->id] = $row;
+//            $category['admin/categories'][$row->id] = $row;
 //            $category['parent_cats'][$row->parent_id][] = $row->id;
 //        }
 //        
@@ -179,7 +179,7 @@ class CategoryController extends Controller {
 
         $category->delete();
 
-        return redirect('categories');
+        return redirect('admin/categories');
     }
 
 }

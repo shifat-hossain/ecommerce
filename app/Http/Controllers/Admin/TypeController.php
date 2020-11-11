@@ -110,6 +110,6 @@ class TypeController extends Controller
     {
         $type = Type::find($id);
         $type->delete();
-        return redirect('types');
+        return redirect('admin/types');
     }
 }

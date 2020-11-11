@@ -148,7 +148,7 @@
                     
                     <ul class="list-inline">
                         <li class="list-inline-item">
-                            <button type="button" class="btn" id="add_btn">Submit</button>
+                            <button type="button" class="btn btn-info" id="add_btn">Submit</button>
                         </li>
                     </ul>
 
@@ -175,7 +175,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 method: "POST",
-                url: "{{url("edit-company-data")}}",
+                url: "{{url("admin/edit-company-data")}}",
                 data: data,
                 cache: false,
                 contentType: false,

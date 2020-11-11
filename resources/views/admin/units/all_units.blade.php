@@ -39,7 +39,7 @@
                             <button onclick="fadeEditModal('{{$row->id}}')" style="margin-right: 5px" class="btn btn-success btn-sm float-left view_modal" >
                                 Edit
                             </button> 
-                            <form method="post" action="{{url('units/'.$row->id)}}">
+                            <form method="post" action="{{url('admin/units/'.$row->id)}}">
                                 @csrf
                                 @method('DELETE')
                                 <button onclick="return confirm('Are you want to delete this!')" type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -148,7 +148,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: '{{url("units/")}}/' + id + '/edit',
+            url: '{{url("admin/units/")}}/' + id + '/edit',
             method: 'GET',
             dataType: 'json',
             success: function (response) {
@@ -177,7 +177,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             method: "PUT",
-            url: "{{url('units')}}/" + id,
+            url: "{{url('admin/units')}}/" + id,
             data: data,
             success: function (data, textStatus, jqXHR) {
 

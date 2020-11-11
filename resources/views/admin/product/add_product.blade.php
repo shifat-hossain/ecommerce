@@ -313,10 +313,10 @@
         });
     }
     
-    $("[name=product_name]").keyup(function () {
+    $("[name=name]").keyup(function () {
         var product_name = $(this).val();
         product_name = product_name.replace(/\s+/g, '-').toLowerCase();
-        
+//        console.log(product_name);
         $("[name=slug]").val(product_name);
     });
     
@@ -357,7 +357,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             method: "POST",
-            url: "{{url("products")}}",
+            url: "{{url("admin/products")}}",
             data: data,
             cache: false,
             contentType: false,
@@ -369,7 +369,7 @@
             if(json_data.status == 'Success') {
                 $("#success_msg").html("Data Save Successfully");
                 $("#success_msg").show();
-                window.location.href = "{{ url('products')}}";
+                window.location.href = "{{ url('admin/products')}}";
             }
             
         }).fail(function(data, textStatus, jqXHR) {

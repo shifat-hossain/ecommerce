@@ -8,7 +8,7 @@
             
             @if(Auth::user()->can('add-product'))
             <div class="card-tools">
-                <a href="{{url('products/create')}}" class="btn btn-info btn-md">
+                <a href="{{url('admin/products/create')}}" class="btn btn-info btn-md">
                     <i class="fa fa-plus-circle"></i>Add New Product
                 </a>
             </div>
@@ -66,7 +66,7 @@
                             
                              
                             @if(Auth::user()->can('edit-product'))
-                            <a href="products/{{ $row->id }}/edit"  class="btn btn-success btn-sm mr-2 float-left text-white">
+                            <a href="admin/products/{{ $row->id }}/edit"  class="btn btn-success btn-sm mr-2 float-left text-white">
                                 Edit
                             </a> 
                             @endif
@@ -91,34 +91,7 @@
     
 </div>
 
-<script>
-    $("#add_btn").click(function (){
-        $(".error_msg").html('');
-        var data = new FormData($('#add_form')[0]);
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            method: "POST",
-            url: "brands",
-            data: data,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (data, textStatus, jqXHR) {
-                
-            }
-        }).done(function() {
-            $("#success_msg").html("Data Save Successfully");
-            location.reload();
-        }).fail(function(data, textStatus, jqXHR) {
-            var json_data = JSON.parse(data.responseText);
-            $.each(json_data.errors, function(key, value){
-                $("#" + key).after("<span class='error_msg' style='color: red;font-weigh: 600'>" + value + "</span>");
-            });
-        });
-    })
-</script>
+
 @endsection
 
 
