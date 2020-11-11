@@ -67,7 +67,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             method: "POST",
-            url: "{{url("users")}}",
+            url: "{{url("admin/users")}}",
             data: data,
             cache: false,
             contentType: false,
@@ -77,7 +77,7 @@
             }
         }).done(function() {
             $("#success_msg").html("Data Save Successfully");
-            // window.location.href = "{{ url('roles')}}";
+             window.location.href = "{{ url('admin/roles')}}";
             // location.reload();
         }).fail(function(data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);

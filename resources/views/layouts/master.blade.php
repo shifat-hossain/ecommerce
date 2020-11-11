@@ -112,7 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             @if($user->can('view-vendor'))
                             <li class="nav-item">
-                                <a href="{{url('vendors')}}" class="nav-link">
+                                <a href="{{url('admin/vendors')}}" class="nav-link">
                                     <i class="fas fa-user-tie nav-icon"></i>
                                     <p>
                                         Vendors
@@ -213,7 +213,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{url('roles')}}" class="nav-link">
+                                        <a href="{{url('admin/roles')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 Roles
