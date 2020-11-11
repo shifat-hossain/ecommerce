@@ -46,7 +46,7 @@
                             </td>
                             
                             <td>
-                                <a class="btn btn-success btn-sm" href="{{url('roles')}}/{{ $row->id }}/edit">
+                                <a class="btn btn-success btn-sm" href="{{url('admin/roles')}}/{{ $row->id }}/edit">
                                     Edit
                                 </a>
                                 <a class="btn btn-danger btn-sm text-white">

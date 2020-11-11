@@ -14,7 +14,7 @@
             <h4 class="card-title">Permissions List</h4>
             
             <div class="card-tools">
-                <a href="{{url('permissions/create')}}" class="btn btn-info btn-sm" >
+                <a href="{{url('admin/permissions/create')}}" class="btn btn-info btn-sm" >
                     <i class="fas fa-plus-circle"></i> Add New Permission
                 </a>
             </div>
@@ -46,7 +46,7 @@
                             </td>
                             
                             <td>
-                                <a href="permissions/{{ $row->id }}/edit" class="btn btn-success btn-sm">
+                                <a href="{{url('admin/permissions')}}/{{ $row->id }}/edit" class="btn btn-success btn-sm">
                                     Edit
                                 </a>
                                 <a class="btn btn-danger btn-sm text-white">

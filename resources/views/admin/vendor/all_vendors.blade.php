@@ -15,7 +15,7 @@
             
             @if(Auth::user()->can('add-vendor'))
             <div class="card-tools">
-                <a href="{{url('vendors/create')}}" class="btn  btn-info btn-sm" >
+                <a href="{{url('admin/vendors/create')}}" class="btn  btn-info btn-sm" >
                     <i class="fas fa-plus-circle"></i> Add New Vendors
                 </a>
             </div>
@@ -52,7 +52,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url : "{{url("vendor-list")}}",
+            url : "{{url("admin/vendor-list")}}",
             type : 'POST',
             'data': function(data){
              }

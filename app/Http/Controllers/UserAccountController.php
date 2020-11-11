@@ -16,13 +16,24 @@ class UserAccountController extends Controller
     {
         $customer_info = New Customer;
 
-        $customer_info->customer_first_name = $request->customer_first_name;
-        $customer_info->customer_first_name = $request->customer_first_name;
-        $customer_info->customer_first_name = $request->customer_first_name;
-        $customer_info->customer_first_name = $request->customer_first_name;
-        $customer_info->customer_first_name = $request->customer_first_name;
-        $customer_info->customer_first_name = $request->customer_first_name;
+        $request->validate([
+            'customer_first_name' => 'required',
+            'customer_last_name' => 'required',
+            'customer_email' => 'required|unique:customers|email',
+            'customer_phone' => 'required',
+            'country_id' => 'required',
+            'password' => 'required|required_with:confirm_password|same:confirm_password',
+            'confirm_password' => 'min:6',
+        ]);
 
-    	echo "<pre>";print_r($customer_info);die();
+        $customer_info->customer_first_name = $request->customer_first_name;
+        $customer_info->customer_last_name = $request->customer_last_name;
+        $customer_info->customer_email = $request->customer_email;
+        $customer_info->customer_phone = $request->customer_phone;
+        $customer_info->country_id = $request->country_id;
+        $customer_info->state_id = $request->state_id;
+        $customer_info->password = $request->password;
+        $customer_info->save();
+    	// echo "<pre>";print_r($customer_info);die();
     }
 }

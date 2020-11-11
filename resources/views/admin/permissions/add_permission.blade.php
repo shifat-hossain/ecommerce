@@ -62,7 +62,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             method: "POST",
-            url: "{{url("permissions")}}",
+            url: "{{url("admin/permissions")}}",
             data: data,
             cache: false,
             contentType: false,
@@ -74,7 +74,7 @@
             $("#success_msg").html("Data Save Successfully");
             $("#success_msg").show();
             setInterval(function() {
-                window.location.href = "{{ url('permissions')}}";
+                window.location.href = "{{ url('admin/permissions')}}";
             }, 2000);
             // location.reload();
         }).fail(function(data, textStatus, jqXHR) {
