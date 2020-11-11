@@ -34,16 +34,15 @@
                     <h4>about</h4>
                 </div>
                 <div class="footer-contant">
-                    <div class="footer-logo"><img src="{{asset('public')}}/frontend_asset/images/icon/logo.png" alt=""></div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                    <div class="footer-logo"><img src="{{asset('storage')}}/app/@isset($company_data[0]->company_thumbnail){{$company_data[0]->company_thumbnail}}@endisset" alt=""></div>
+                    <p>@isset($company_data[0]->company_summary){{$company_data[0]->company_summary}}@endisset</p>
                     <div class="footer-social">
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                            <li><a href="//@isset($company_data[0]->facebook_link){{$company_data[0]->facebook_link}}@endisset"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="//@isset($company_data[0]->google_link){{$company_data[0]->google_link}}@endisset"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li><a href="//@isset($company_data[0]->twitter_link){{$company_data[0]->twitter_link}}@endisset"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="//@isset($company_data[0]->instagram_link){{$company_data[0]->instagram_link}}@endisset"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                          
                         </ul>
                     </div>
                 </div>
@@ -87,7 +86,7 @@
                     </div>
                     <div class="footer-contant">
                         <ul class="contact-list">
-                            <li><i class="fa fa-map-marker"></i>@isset($company_data[0]->company_name){{$company_data[0]->company_name}}@endisset Demo Store, Demo store India 345-659
+                            <li><i class="fa fa-map-marker"></i>@isset($company_data[0]->company_address){{$company_data[0]->company_address}}@endisset
                             </li>
                             <li><i class="fa fa-phone"></i>Call Us: @isset($company_data[0]->company_phone){{$company_data[0]->company_phone}}@endisset</li>
                             <li><i class="fa fa-envelope-o"></i>Email Us: @isset($company_data[0]->company_email){{$company_data[0]->company_email}}@endisset</li>
