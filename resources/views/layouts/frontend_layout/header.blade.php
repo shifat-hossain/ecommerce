@@ -87,7 +87,7 @@
                                     <a href="#">Home</a>
                                 </li>
                                 
-                                @foreach($all_parent_category as $category)
+                                @foreach(get_all_category() as $category)
                                 <li>
                                     
                                     <a href="{{url('/'.$category->slug)}}">
