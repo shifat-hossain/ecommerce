@@ -1,3 +1,4 @@
+@inject('CommonTrait', 'App\Http\Controllers\UserAccountController')
 <div class="mobile-fix-option"></div>
 <div class="top-header">
     <div class="container">
@@ -18,6 +19,7 @@
                         My Account
                         <ul class="onhover-show-div">
                             <li><a href="#" data-lng="en">Login</a></li>
+                            <li><a href="{{ url('user/registration') }}" data-lng="en">Registration</a></li>
                             <li><a href="#" data-lng="es">Logout</a></li>
                         </ul>
                     </li>
@@ -46,7 +48,7 @@
                                     </div>
                                 </div>
                                 <ul id="sub-menu" class="sm pixelstrap sm-vertical">
-                                @foreach($all_parent_category as $category)
+                                @foreach(get_all_category() as $category)
                                 <li>
 
                                     <a href="{{url('/'.$category->slug)}}">
