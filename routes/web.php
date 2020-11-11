@@ -31,10 +31,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('user/registration', 'UserAccountController@user_registration');
 Route::post('user/store-registration', 'UserAccountController@store_registration');
 
-Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard')->middleware('auth');
 
 
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function() {
+    Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard')->middleware('auth');
+    
     Route::post('vendor-list', 'Admin\VendorController@vendor_list');
     Route::resource('vendors', 'Admin\VendorController');
     
