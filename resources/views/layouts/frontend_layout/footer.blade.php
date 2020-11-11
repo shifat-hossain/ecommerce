@@ -90,7 +90,7 @@
                             </li>
                             <li><i class="fa fa-phone"></i>Call Us: @isset($company_data[0]->company_phone){{$company_data[0]->company_phone}}@endisset</li>
                             <li><i class="fa fa-envelope-o"></i>Email Us: @isset($company_data[0]->company_email){{$company_data[0]->company_email}}@endisset</li>
-                            <li><i class="fa fa-fax"></i>Fax: 123456</li>
+                          
                         </ul>
                     </div>
                 </div>
