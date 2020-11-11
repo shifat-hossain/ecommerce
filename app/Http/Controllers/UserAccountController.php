@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Order;
 use Illuminate\Support\Facades\Hash;
 class UserAccountController extends Controller
 {
@@ -27,6 +28,15 @@ class UserAccountController extends Controller
             'confirm_password' => 'min:6',
         ]);
 
+        if (Customer::all()->last()) {
+            $last_customer_info = Customer::all()->last();
+            $last_id = $last_customer_info->id;
+        } else {
+            $last_id = 0;
+        }
+        
+        $customer_info->customer_code = "CST-100".($last_id + 1);
+
         $customer_info->customer_first_name = $request->customer_first_name;
         $customer_info->customer_last_name = $request->customer_last_name;
         $customer_info->customer_email = $request->customer_email;
@@ -37,15 +47,21 @@ class UserAccountController extends Controller
         $customer_info->state_name = $request->state_name;
         $customer_info->customer_postal_code = $request->customer_postal_code;
         $customer_info->customer_address = $request->customer_address;
-        $customer_info->customer_code = '1';
-        $customer_info->customer_status = 'INACTIVE';
+        $customer_info->customer_status = 'ACTIVE';
         $customer_info->password = Hash::make($request->password);
-        $customer_info->save();
-    	// echo "<pre>";print_r($customer_info);die();
+
+        if ($customer_info->save()) {
+         return redirect('user/profile/'.$customer_info->customer_code);
+        }
+    	
     }
 
-    public function get_states($id) {
-       
-        return get_state();
+    public function user_profile($id)
+    {
+    	$data['customer_info'] = Customer::where('customer_code',$id)->get();
+
+    	$data['order_list'] = Order::where('customer_id',$data['customer_info'][0]->id)->get();
+    	// echo "<pre>";print_r($data['customer_info'][0]->id);die();
+    	return view('frontend/user_account/user_profile',$data);   
     }
 }

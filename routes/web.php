@@ -30,6 +30,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('user/registration', 'UserAccountController@user_registration');
 Route::post('user/store-registration', 'UserAccountController@store_registration');
+Route::get('user/profile/{any}', 'UserAccountController@user_profile');
 
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
