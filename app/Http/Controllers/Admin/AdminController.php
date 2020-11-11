@@ -45,11 +45,11 @@ class AdminController extends Controller {
         $data['company_summary'] = $request->company_summary;
         $data['longitude'] = $request->longitude;
         $data['latitude'] = $request->latitude;
-        $data['facebook_link'] = $request->fb_link;
+        $data['facebook_link'] = $request->facebook_link;
         $data['twitter_link'] = $request->twitter_link;
         $data['pinterest_link'] = $request->pinterest_link;
         $data['google_link'] = $request->google_link;
-        $data['instagram_link'] = $request->insta_link;
+        $data['instagram_link'] = $request->instagram_link;
         if ($company_info != null) {
             DB::table('company_info')->where('id', 1)->update($data);
         }

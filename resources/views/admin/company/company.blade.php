@@ -75,7 +75,7 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="inputGroupSelect07" class="">Facebook Link:</label>
-                                <input type="text" class="form-control" name="fb_link" value="{{ $company_data[0]->fb_link}}">
+                                <input type="text" class="form-control" name="facebook_link" value="{{ $company_data[0]->facebook_link}}">
                             </div>
                         </div>
 
@@ -104,7 +104,7 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="inputGroupSelect07" class="">Instagram Link:</label>
-                                <input type="text" class="form-control" name="insta_link" value="{{ $company_data[0]->insta_link}}">
+                                <input type="text" class="form-control" name="instagram_link" value="{{ $company_data[0]->instagram_link}}">
                             </div>
                         </div>
                     </div>
