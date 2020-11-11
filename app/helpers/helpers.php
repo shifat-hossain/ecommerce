@@ -22,4 +22,21 @@ if (!function_exists('get_all_country')) {
 }
 
 
+if (!function_exists('get_state')) {
+
+    function get_state($id) {
+
+        $states = DB::table('states')->where('country_id', $id)->get();
+        $html = '';
+        $html .= '<option value="">Select State</option>';
+        foreach ($states as $row) {
+            $val = $row->id . ' | ' . $row->name;
+            $html .= '<option value="' . $val . '">' . $row->name . '</option>';
+        }
+        return response($html);    
+    }
+}
+
+
+
 

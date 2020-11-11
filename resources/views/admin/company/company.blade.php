@@ -148,7 +148,7 @@
                     
                     <ul class="list-inline">
                         <li class="list-inline-item">
-                            <button type="button" class="btn" id="add_btn">Submit</button>
+                            <button type="button" class="btn btn-info" id="add_btn">Submit</button>
                         </li>
                     </ul>
 

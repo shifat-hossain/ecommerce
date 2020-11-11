@@ -14,7 +14,7 @@
             <h4 class="card-title">Users List</h4>
             
             <div class="card-tools">
-                <a href="{{url('users/create')}}" class="btn btn-info btn-sm" >
+                <a href="{{url('admin/users/create')}}" class="btn btn-info btn-sm" >
                     <i class="fas fa-plus-circle"></i> Add New User
                 </a>
             </div>

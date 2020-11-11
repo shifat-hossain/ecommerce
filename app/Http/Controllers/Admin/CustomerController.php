@@ -148,14 +148,7 @@ class CustomerController extends Controller {
      * @return \Illuminate\Http\Response states list
      */
     public function get_states($id) {
-        $states = State::where('country_id', $id)->get();
-        $html = '';
-        $html .= '<option value="">Select Region</option>';
-        foreach ($states as $row) {
-            $val = $row->id . ' | ' . $row->name;
-            $html .= '<option value="' . $val . '">' . $row->name . '</option>';
-        }
-        return response($html);
+        return get_state($id);
     }
 
     /**
@@ -323,7 +316,7 @@ class CustomerController extends Controller {
 
         $customer = Customer::find($id);
         $customer->delete();
-        return redirect('customers');
+        return redirect('admin/customers');
     }
 
     public function change_status($id) {

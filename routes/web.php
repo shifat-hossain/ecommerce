@@ -32,59 +32,81 @@ Route::get('user/registration', 'UserAccountController@user_registration');
 Route::post('user/store-registration', 'UserAccountController@store_registration');
 
 
-
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function() {
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
-    
+
+//    Vendors
     Route::post('vendor-list', 'Admin\VendorController@vendor_list');
     Route::resource('vendors', 'Admin\VendorController');
-    
+
+//    Role & Permission
     Route::resource('roles', 'Admin\RoleController');
     Route::resource('permissions', 'Admin\PermissionController');
-    
+
+//    Users
     Route::post('user-list', 'Admin\UserController@user_list');
     Route::resource('users', 'Admin\UserController');
+
+//    Customers
+    Route::resource('customers', 'Admin\CustomerController');
+    Route::post('customer-list', 'Admin\CustomerController@customer_list');
+    Route::post('change-customer-status/{id}', 'Admin\CustomerController@change_status');
+
+//    Custom Field
+    Route::resource('custom-fields', 'Admin\CustomFieldController');
+    Route::post('change-fields-status/{id}', 'Admin\CustomFieldController@change_status');
+
+//    Customer
+    Route::resource('categories', 'Admin\CategoryController');
+    
+//    Brand
+    Route::resource('brands', 'Admin\BrandController');
+    
+//    Sliders
+    Route::resource('sliders', 'Admin\SliderController');
+    
+//    Attributes
+    Route::resource('attributes', 'Admin\AttributeController');
+
+    //Get Attribute Group By Id
+    Route::post('fetch-attribute-group/{any}', 'Admin\AttributeController@fetch_attribute_group');
+    //Get Attribute Group By Id
+
+    //Delete Attribute  By Id
+    Route::delete('delete-attribute/{any}', 'Admin\AttributeController@delete_attribute');
+    //Delete Attribute By Id
+
+    //update Attribute By Id
+    Route::post('attributes-update/{any}', 'Admin\AttributeController@attributes_update');
+    //Update Attribute By Id
+    //Upload Summernote Image
+    Route::post('summurnote-image-upload', 'Admin\AttributeController@summurnote_image_upload')->middleware('auth');
+    //Upload Summernote Image
+
+    Route::resource('products', 'Admin\ProductController')->middleware('auth');
+    Route::post('products/upload', 'Admin\ProductController@upload')->name('products.upload');
+
+
+
 });
 
 
 
-Route::resource('customers', 'Admin\CustomerController')->middleware('auth');
-Route::post('customer-list', 'Admin\CustomerController@customer_list')->middleware('auth');
-Route::post('change-customer-status/{id}', 'Admin\CustomerController@change_status')->middleware('auth');
 
-Route::resource('custom-fields', 'Admin\CustomFieldController')->middleware('auth');
-Route::post('change-fields-status/{id}', 'Admin\CustomFieldController@change_status')->middleware('auth');
 
-Route::resource('categories', 'Admin\CategoryController')->middleware('auth');
-Route::resource('brands', 'Admin\BrandController')->middleware('auth');
-Route::resource('sliders', 'Admin\SliderController')->middleware('auth');
-Route::resource('attributes', 'Admin\AttributeController')->middleware('auth');
-Route::resource('products', 'Admin\ProductController')->middleware('auth');
-Route::post('products/upload', 'Admin\ProductController@upload')->name('products.upload');
 
-//Get Attribute Group By Id
-Route::post('fetch-attribute-group/{any}', 'Admin\AttributeController@fetch_attribute_group')->middleware('auth');
-//Get Attribute Group By Id
-//
-//Delete Attribute  By Id
-Route::delete('delete-attribute/{any}', 'Admin\AttributeController@delete_attribute')->middleware('auth');
-//Delete Attribute By Id
-//
-//update Attribute By Id
-Route::post('attributes-update/{any}', 'Admin\AttributeController@attributes_update')->middleware('auth');
-//Update Attribute By Id
-//
-//Upload Summernote Image
-Route::post('summurnote-image-upload', 'Admin\AttributeController@summurnote_image_upload')->middleware('auth');
-//Upload Summernote Image
+
+
+
+
+
 
 Route::resource('types', 'Admin\TypeController')->middleware('auth');
 Route::resource('units', 'Admin\UnitController')->middleware('auth');
 
+
 //Get states by country id
-Route::get('get-states/{any}','Admin\CustomerController@get_states');
-//Get states by country id
-Route::get('company','Admin\AdminController@index');
-Route::post('edit-company-data','Admin\AdminController@edit_company_data');
+Route::get('company', 'Admin\AdminController@index');
+Route::post('edit-company-data', 'Admin\AdminController@edit_company_data');
 
 

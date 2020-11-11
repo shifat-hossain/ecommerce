@@ -128,6 +128,6 @@ class SliderController extends Controller
     {
         $slider = Slider::find($id);
         $slider->delete();
-        return redirect('sliders');
+        return redirect('admin/sliders');
     }
 }

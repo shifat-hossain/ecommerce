@@ -166,7 +166,7 @@ class CustomFieldController extends Controller
         DB::statement('ALTER TABLE '.$table_name.' DROP COLUMN '.$custom_name);
         $custom_field->delete();
 
-        return redirect('custom-fields');
+        return redirect('admin/custom-fields');
     }
 
     public function change_status($id){

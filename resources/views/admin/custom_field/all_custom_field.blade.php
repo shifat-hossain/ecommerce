@@ -14,7 +14,7 @@
             <h4 class="card-title">Custom Field List</h4>
             
             <div class="card-tools">
-                <a href="{{url('custom-fields/create')}}" class="btn btn-info btn-sm" >
+                <a href="{{url('admin/custom-fields/create')}}" class="btn btn-info btn-sm" >
                     <i class="fas fa-plus-circle"></i> Add New Custom Field
                 </a>
             </div>
@@ -48,9 +48,9 @@
                             </div>
                         </td>
                         <td>
-                            <a href="{{url('custom-fields/'.$row->id.'/edit')}}"   class="btn  btn-success btn-sm float-left mr-2" >Edit</a>
+                            <a href="{{url('admin/custom-fields/'.$row->id.'/edit')}}"   class="btn  btn-success btn-sm float-left mr-2" >Edit</a>
 
-                            <form method="post" action="{{url('custom-fields/'.$row->id)}}">
+                            <form method="post" action="{{url('admin/custom-fields/'.$row->id)}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -83,7 +83,7 @@
                 
             }
         }).done(function() {
-            window.location.href = "{{ url('custom-fields')}}";
+            window.location.href = "{{ url('admin/custom-fields')}}";
             // window.location.reload();
         });
     });

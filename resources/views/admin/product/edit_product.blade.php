@@ -340,7 +340,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             method: "POST",
-            url: "{{url("products")}}/"+ $("[name=id]").val(),
+            url: "{{url("admin/products")}}/"+ $("[name=id]").val(),
             data: data,
             cache: false,
             contentType: false,
@@ -354,7 +354,7 @@
                 $("#success_msg").html("Data Update Successfully");
                 $("#success_msg").show();
                 
-                window.location.href = "{{ url('products')}}";
+                window.location.href = "{{ url('admin/products')}}";
             }
         }).fail(function (data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);

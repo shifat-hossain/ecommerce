@@ -43,7 +43,7 @@
                                 Edit
                             </a> 
 
-                            <form method="post" action="{{url('delete-attribute/'.$row->id)}}">
+                            <form method="post" action="{{url('admin/delete-attribute/'.$row->id)}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -141,7 +141,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             method: "POST",
-            url: "{{ url('attributes') }}",
+            url: "{{ url('admin/attributes') }}",
             data: data,
             success: function (data, textStatus, jqXHR) {
 
@@ -171,7 +171,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: '{{url("attributes/")}}/' + id + '/edit',
+            url: '{{url("admin/attributes/")}}/' + id + '/edit',
             method: 'GET',
             dataType: 'json',
             success: function () {
@@ -205,7 +205,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 method: "POST",
-                url: "{{url('attributes-update')}}/" + id,
+                url: "{{url('admin/attributes-update')}}/" + id,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
 

@@ -56,19 +56,19 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             method: "POST",
-            url: "{{url('brands/')}}/" + brand_id + "",
+            url: "{{url('admin/brands/')}}/" + brand_id + "",
             data: new FormData(this),
             dataType: 'JSON',
             contentType: false,
             cache: false,
             processData: false,
             success: function (data, textStatus, jqXHR) {
-            window.location.href = "{{ url('brands')}}";
+            window.location.href = "{{ url('admin/brands')}}";
             }
         }).done(function () {
             $("#success_msg").html("Data Updated Successfully");
 //            setTimeout(function(){  }, 3000);
-             window.location.href = "{{ url('brands')}}";
+             window.location.href = "{{ url('admin/brands')}}";
             // location.reload();
         }).fail(function (data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);
