@@ -35,7 +35,13 @@ class AdminController extends Controller {
         $data['twitter_link'] = $request->twitter_link;
         $data['pinterest_link'] = $request->pinterest_link;
         $data['google_link'] = $request->google_link;
-        DB::table('company_info')->where('id', 1)->update($data);           
+        if($company_info != null){
+            DB::table('company_info')->where('id', 1)->update($data);
+        }
+        if($company_info == null){
+            DB::table('company_info')->insert($data);
+        }
+                   
             
     }
 

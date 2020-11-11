@@ -104,6 +104,7 @@
                     </div>
 
                     <div class="form-group">
+                         <label for="inputGroupSelect07" class="">Address:</label>
                         <textarea class="form-control textarea text-left p-3 h-100" name="company_address" id="exampleFormControlTextarea1" rows="2" placeholder="Company Address">{{ $company_data[0]->company_address}}</textarea>
                     </div>
 
