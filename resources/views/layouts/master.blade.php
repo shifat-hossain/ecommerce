@@ -270,7 +270,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <a href="{{url('company')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
-                                                Company
+                                                Company Info
                                             </p>
                                         </a>
                                     </li>

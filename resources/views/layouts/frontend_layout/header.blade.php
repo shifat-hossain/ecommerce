@@ -6,8 +6,8 @@
             <div class="col-lg-6">
                 <div class="header-contact">
                     <ul>
-                        <li>Welcome to Our store Multikart</li>
-                        <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: 123 - 456 - 7890</li>
+                        <li>Welcome to Our store @isset($company_data[0]->company_name){{$company_data[0]->company_name}}@endisset</li>
+                        <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: @isset($company_data[0]->company_phone){{$company_data[0]->company_phone}}@endisset</li>
                     </ul>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                                     <a href="#">Home</a>
                                 </li>
                                 
-                                @foreach($all_parent_category as $category)
+                                @foreach(get_all_category() as $category)
                                 <li>
                                     
                                     <a href="{{url('/'.$category->slug)}}">
