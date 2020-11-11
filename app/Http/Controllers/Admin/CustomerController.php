@@ -173,7 +173,6 @@ class CustomerController extends Controller {
         }
 
         $validationArray['customer_first_name'] = 'required';
-        $validationArray['country'] = 'required';
         $validationArray['state_name'] = 'required';
         $validationArray['customer_last_name'] = 'required';
         $validationArray['password'] = 'min:6|required_with:confirm_password';
