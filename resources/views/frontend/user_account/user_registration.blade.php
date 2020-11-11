@@ -35,15 +35,18 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h3>create account</h3>
+
+                    <h5 class="success_msg" style="color: green;font-weight: 600;"></h5>
                     <div class="theme-card">
                         <form id="add_form" class="theme-form">
+                            
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <label for="email">First Name</label>
+                                    <label for="customer_first_name">First Name</label>
                                     <input type="text" class="form-control" id="customer_first_name" name="customer_first_name" placeholder="First Name" required="">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="review">Last Name</label>
+                                    <label for="customer_last_name">Last Name</label>
                                     <input type="text" class="form-control" id="customer_last_name" name="  customer_last_name" placeholder="Last Name"
                                         required="">
                                 </div>
@@ -51,7 +54,7 @@
 
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <label for="email">Email</label>
+                                    <label for="customer_email">Email</label>
                                     <input type="text" class="form-control" id="customer_email" name="customer_email" placeholder="Email" required="">
                                 </div>
                                 <div class="col-md-6">
@@ -64,7 +67,8 @@
                             <div class="form-row mb-4">
                                 <div class="col-md-6">
                                     <label for="country_id">Country</label>
-                                    <select class="form-control" id="country_id" name="country_id" >
+                                    <input type="hidden" name="country_name" id="country_name">
+                                    <select class="form-control" id="country_id" name="country_id">
                                         <option value="">Select Country</option>
                                         @foreach(get_all_country() as $country)
                                         <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -73,8 +77,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="state_id">State</label>
-                                    <select class="form-control" id="state_id" name="state_id" >
-                                        <option value="1">Select State</option>
+                                    <input type="hidden" name="state_name" id="state_name">
+                                    <input type="hidden" name="state_id" id="state_id_view">
+
+                                    <select class="form-control" id="state_id">
+                                        <option value="">Select State</option>
                                     </select>
                                 </div>
                             </div>
@@ -128,8 +135,8 @@
 
             }
         }).done(function () {
-            $("#success_msg").html("Data Save Successfully");
-            // location.reload();
+            $("#success_msg").html("Registration Successfull");
+            location.reload();
         }).fail(function (data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);
             $.each(json_data.errors, function (key, value) {
@@ -137,5 +144,30 @@
             });
         });
     });
+
+    $(document).on('change', '#country_id', function() {
+        var id = $(this).find(':selected').val();
+        var country_name = $(this).find(':selected').text();
+        $('#country_name').val(country_name);
+         $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token-home"]').attr('content')
+            },
+            url: "{{url('get-states')}}/" + id,
+            success: function (response) {
+                $('#state_id').html(response);
+            }
+        });
+    });
+
+    $(document).on('change', '#state_id', function() {
+        let state_value = $("select#state_id option").filter(":selected").val();
+        var splitted = state_value.split('|');
+        var id = splitted.shift();
+        var state_name = splitted.join(',');
+        $('#state_id_view').val(id);
+        $('#state_name').val(state_name);
+    });
+
 </script>
 @endsection

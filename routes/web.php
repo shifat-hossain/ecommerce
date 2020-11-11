@@ -33,6 +33,7 @@ Route::post('user/store-registration', 'UserAccountController@store_registration
 
 
 
+
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
 
@@ -70,22 +71,22 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::resource('attributes', 'Admin\AttributeController');
 
     //Get Attribute Group By Id
-Route::post('fetch-attribute-group/{any}', 'Admin\AttributeController@fetch_attribute_group');
-//Get Attribute Group By Id
+    Route::post('fetch-attribute-group/{any}', 'Admin\AttributeController@fetch_attribute_group');
+    //Get Attribute Group By Id
 
-//Delete Attribute  By Id
-Route::delete('delete-attribute/{any}', 'Admin\AttributeController@delete_attribute');
-//Delete Attribute By Id
+    //Delete Attribute  By Id
+    Route::delete('delete-attribute/{any}', 'Admin\AttributeController@delete_attribute');
+    //Delete Attribute By Id
 
-//update Attribute By Id
-Route::post('attributes-update/{any}', 'Admin\AttributeController@attributes_update');
-//Update Attribute By Id
-//Upload Summernote Image
-Route::post('summurnote-image-upload', 'Admin\AttributeController@summurnote_image_upload')->middleware('auth');
-//Upload Summernote Image
+    //update Attribute By Id
+    Route::post('attributes-update/{any}', 'Admin\AttributeController@attributes_update');
+    //Update Attribute By Id
+    //Upload Summernote Image
+    Route::post('summurnote-image-upload', 'Admin\AttributeController@summurnote_image_upload')->middleware('auth');
+    //Upload Summernote Image
 
-Route::resource('products', 'Admin\ProductController')->middleware('auth');
-Route::post('products/upload', 'Admin\ProductController@upload')->name('products.upload');
+    Route::resource('products', 'Admin\ProductController')->middleware('auth');
+    Route::post('products/upload', 'Admin\ProductController@upload')->name('products.upload');
 
 
 
