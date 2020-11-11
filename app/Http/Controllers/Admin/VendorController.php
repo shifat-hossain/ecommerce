@@ -155,37 +155,50 @@ class VendorController extends Controller
         $validationArray['vendor_email'] = 'required|unique:vendors|email';
         $validationArray['vendor_phone'] = 'required|unique:vendors';
 
-
         $validationArray['vendor_password'] = 'required|required_with:confirm_password|same:confirm_password';
         $validationArray['confirm_password'] = 'min:6';
 
         $this->validate($request, $validationArray);
 
-        $data_user['name'] = $request->input('vendor_name');
-        $data_user['email'] = $request->input('vendor_email');
-        $data_user['password'] = Hash::make($request->input('vendor_password'));
-        $user_id = User::insertGetId($data_user,'id');
+        $vendor_role = \App\Models\Role::where('slug', 'vendor')->first();
 
-        $data_user_role['user_id'] = $user_id;
-        $data_user_role['role_id'] = 9;
-        DB::table('users_roles')->insert($data_user_role);
+        if ($vendor_role) {
+            $data_user['name'] = $request->input('vendor_name');
+            $data_user['email'] = $request->input('vendor_email');
+            $data_user['password'] = Hash::make($request->input('vendor_password'));
+            $user_id = User::insertGetId($data_user, 'id');
 
-        $data['user_id'] = $user_id;
-        $data['vendor_type'] = $request->input('vendor_type');
-        $data['company_name'] = $request->input('company_name');
-        $data['vendor_name'] = $request->input('vendor_name');
-        $data['vendor_email'] = $request->input('vendor_email');
-        $data['vendor_phone'] = $request->input('vendor_phone');
-        $data['vendor_country_id'] = $request->input('vendor_country_id');
-        $data['vendor_region_id'] = $request->input('vendor_region_id');
-        $data['vendor_country_name'] = $request->input('vendor_country_name');
-        $data['vendor_region_name'] = $request->input('vendor_region_name');
+            $data_user_role['user_id'] = $user_id;
 
-        foreach ($all_vendor_custom_field as $key => $row) {             
-            $data[$row['field_key']] = $request->input($row['field_key']); 
+            $data_user_role['role_id'] = $vendor_role->id;
+            DB::table('users_roles')->insert($data_user_role);
+
+            $last_vendor_info = Vendor::all()->last();
+
+            $data['user_id'] = $user_id;
+            $data['vendor_id'] = "V-500" . ($last_vendor_info->id + 1);
+            if ($request->input('vendor_type') == 'MANUFACTURER') {
+                $data['vendor_id'] = "V-300" . ($last_vendor_info->id + 1);
+            } else if ($request->input('vendor_type') == 'SUPPLIER') {
+                $data['vendor_id'] = "V-400" . ($last_vendor_info->id + 1);
+            }
+
+            $data['vendor_type'] = $request->input('vendor_type');
+            $data['company_name'] = $request->input('company_name');
+            $data['vendor_name'] = $request->input('vendor_name');
+            $data['vendor_email'] = $request->input('vendor_email');
+            $data['vendor_phone'] = $request->input('vendor_phone');
+            $data['vendor_country_id'] = $request->input('vendor_country_id');
+            $data['vendor_region_id'] = $request->input('vendor_region_id');
+            $data['vendor_country_name'] = $request->input('vendor_country_name');
+            $data['vendor_region_name'] = $request->input('vendor_region_name');
+
+            foreach ($all_vendor_custom_field as $key => $row) {
+                $data[$row['field_key']] = $request->input($row['field_key']);
+            }
+
+            Vendor::insert($data);
         }
-
-        Vendor::insert($data);
     }
 
     /**
