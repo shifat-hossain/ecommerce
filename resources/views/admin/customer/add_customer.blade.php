@@ -172,7 +172,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             method: "POST",
-            url: "{{url("customers")}}",
+            url: "{{url("admin/customers")}}",
             data: data,
             cache: false,
             contentType: false,
@@ -182,7 +182,7 @@
             }
         }).done(function () {
             $("#success_msg").html("Data Save Successfully");
-            window.location.href = "{{ url('customers')}}";
+            window.location.href = "{{ url('admin/customers')}}";
             // window.location.reload();
         }).fail(function (data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);

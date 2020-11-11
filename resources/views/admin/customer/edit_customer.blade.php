@@ -173,7 +173,7 @@
 
     $("#edit_btn").click(function () {
 
-        var url = "{{url("customers")}}"
+        var url = "{{url("admin/customers")}}"
         var id = $('[name=id]').val();
         $(".error_msg").html('');
         var data = new FormData($('#edit_form')[0]);
@@ -192,7 +192,7 @@
             }
         }).done(function () {
             $("#success_msg").html("Data Save Successfully");
-            window.location.href = "{{ url('customers')}}";
+            window.location.href = "{{ url('admin/customers')}}";
             //window.location.reload();
         }).fail(function (data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);

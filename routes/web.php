@@ -56,7 +56,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::resource('custom-fields', 'Admin\CustomFieldController');
     Route::post('change-fields-status/{id}', 'Admin\CustomFieldController@change_status');
 
-//    Customer
+//    Categories
     Route::resource('categories', 'Admin\CategoryController');
 
 //    Brand
