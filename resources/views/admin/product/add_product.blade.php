@@ -313,10 +313,10 @@
         });
     }
     
-    $("[name=product_name]").keyup(function () {
+    $("[name=name]").keyup(function () {
         var product_name = $(this).val();
         product_name = product_name.replace(/\s+/g, '-').toLowerCase();
-        
+//        console.log(product_name);
         $("[name=slug]").val(product_name);
     });
     
