@@ -111,7 +111,8 @@ class BrandController extends Controller {
             File::delete('storage/app/' . $data->brand_image);
         }
         $data->delete();
-        return redirect()->action("BrandController@index");
+        return redirect('admin/brands');
+       
     }
 
 }

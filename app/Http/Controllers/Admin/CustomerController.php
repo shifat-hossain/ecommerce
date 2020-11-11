@@ -323,7 +323,7 @@ class CustomerController extends Controller {
 
         $customer = Customer::find($id);
         $customer->delete();
-        return redirect('customers');
+        return redirect('admin/customers');
     }
 
     public function change_status($id) {

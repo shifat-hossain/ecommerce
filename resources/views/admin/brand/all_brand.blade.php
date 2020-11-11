@@ -38,13 +38,13 @@
                         <td>   
 
                             @if(Auth::user()->can('edit-brand'))                            
-                            <a href="{{url('brands/'.$brand->id.'/edit')}}" style="margin-right: 5px" class="btn btn-primary btn-sm float-left view_modal" >
+                            <a href="{{url('admin/brands/'.$brand->id.'/edit')}}" style="margin-right: 5px" class="btn btn-primary btn-sm float-left view_modal" >
                                 Edit
                             </a> 
                             @endif
 
                             @if(Auth::user()->can('delete-brand'))
-                            <form method="post" action="{{url('brands/'.$brand->id)}}">
+                            <form method="post" action="{{url('admin/brands/'.$brand->id)}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>

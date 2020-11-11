@@ -101,7 +101,7 @@
     $("#edit_btn").click(function (){
         
         $(".error_msg").html('');
-        var url = "{{url("custom-fields")}}";
+        var url = "{{url("admin/custom-fields")}}";
         var id = $('[name=id]').val();
         var data = new FormData($('#edit_form')[0]);
         
@@ -120,7 +120,7 @@
             }
         }).done(function() {
             $("#success_msg").html("Data Save Successfully");
-            window.location.href = "{{ url('custom-fields')}}";
+            window.location.href = "{{ url('admin/custom-fields')}}";
             // window.location.reload();
         }).fail(function(data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);

@@ -80,9 +80,9 @@ class UserController extends Controller
         foreach($user_list as $row) {
             $action = '';
             $message = 'Are You Sure want to delete';
-            $action.= "<a class='btn btn-primary btn-sm mr-2' href='admin/users/".$row->id."'>View</a>";
-            $action.= "<a class='btn btn-success btn-sm mr-2' href='admin/users/".$row->id."/edit'>Edit</a>";
-            $action.= "<form action='".route('admin.users.destroy', $row->id)."' method='POST' style='display: inline-block;'>"
+            $action.= "<a class='btn btn-primary btn-sm mr-2' href='users/".$row->id."'>View</a>";
+            $action.= "<a class='btn btn-success btn-sm mr-2' href='users/".$row->id."/edit'>Edit</a>";
+            $action.= "<form action='".route('users.destroy', $row->id)."' method='POST' style='display: inline-block;'>"
                             .csrf_field().""
                             .method_field('DELETE')."
                             <button class='btn btn-danger btn-sm' type='submit'>Delete</button>
@@ -224,6 +224,6 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         
-        return redirect('users');
+        return redirect('admin/users');
     }
 }

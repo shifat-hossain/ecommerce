@@ -357,7 +357,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             method: "POST",
-            url: "{{url("products")}}",
+            url: "{{url("admin/products")}}",
             data: data,
             cache: false,
             contentType: false,
@@ -369,7 +369,7 @@
             if(json_data.status == 'Success') {
                 $("#success_msg").html("Data Save Successfully");
                 $("#success_msg").show();
-                window.location.href = "{{ url('products')}}";
+                window.location.href = "{{ url('admin/products')}}";
             }
             
         }).fail(function(data, textStatus, jqXHR) {
