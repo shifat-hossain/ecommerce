@@ -24,7 +24,7 @@ class HomeController extends Controller {
      */
     public function index() {
         $data['all_slider'] = Slider::all();
-        $data['all_parent_category'] = Category::whereNull('parent_id')->get();
+        // $data['all_parent_category'] = Category::whereNull('parent_id')->get();
 //        echo '<pre>';print_r($data['all_parent_category']);die;
         return view('frontend/home_content', $data);
     }
