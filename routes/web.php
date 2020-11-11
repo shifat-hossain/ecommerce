@@ -25,13 +25,14 @@ Auth::routes([
 ]);
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/{any}', 'HomeController@category_product')->name('home');
+//Route::get('/{any}', 'HomeController@category_product')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('user/registration', 'UserAccountController@user_registration');
 Route::post('user/store-registration', 'UserAccountController@store_registration');
 
 Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard')->middleware('auth');
+
 
 
 
@@ -79,5 +80,7 @@ Route::resource('units', 'Admin\UnitController')->middleware('auth');
 //Get states by country id
 Route::get('get-states/{any}','Admin\CustomerController@get_states');
 //Get states by country id
+Route::get('company','Admin\AdminController@index');
+Route::post('edit-company-data','Admin\AdminController@edit_company_data');
 
 

@@ -6,7 +6,7 @@
                     <div class="subscribe">
                         <div>
                             <h4>KNOW IT ALL FIRST!</h4>
-                            <p>Never Miss Anything From Multikart By Signing Up To Our Newsletter.</p>
+                            <p>Never Miss Anything From @isset($company_data[0]->company_name){{$company_data[0]->company_name}}@endisset By Signing Up To Our Newsletter.</p>
                         </div>
                     </div>
                 </div>
@@ -87,10 +87,10 @@
                     </div>
                     <div class="footer-contant">
                         <ul class="contact-list">
-                            <li><i class="fa fa-map-marker"></i>Multikart Demo Store, Demo store India 345-659
+                            <li><i class="fa fa-map-marker"></i>@isset($company_data[0]->company_name){{$company_data[0]->company_name}}@endisset Demo Store, Demo store India 345-659
                             </li>
-                            <li><i class="fa fa-phone"></i>Call Us: 123-456-7898</li>
-                            <li><i class="fa fa-envelope-o"></i>Email Us: Support@Fiot.com</li>
+                            <li><i class="fa fa-phone"></i>Call Us: @isset($company_data[0]->company_phone){{$company_data[0]->company_phone}}@endisset</li>
+                            <li><i class="fa fa-envelope-o"></i>Email Us: @isset($company_data[0]->company_email){{$company_data[0]->company_email}}@endisset</li>
                             <li><i class="fa fa-fax"></i>Fax: 123456</li>
                         </ul>
                     </div>

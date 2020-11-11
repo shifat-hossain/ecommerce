@@ -146,21 +146,6 @@
                                 </div>
                                 
                                 <div class="card" style="height: 150px; overflow: auto;"> 
-<<<<<<< HEAD
-                                    
-=======
-                                    @foreach($all_attribute_with_group as $row)
-                                        @foreach($row->attributes as $val)
-                                            @if(in_array($val->id, $product_attibute_array)) 
-                                                <div id="show-attribute-{{$val->id}}" style="margin-left: 15px">
-                                                    <i class="fa fa-minus-circle"></i> 
-                                                        {{ $row->attribute_group_name }} : {{ $val->attribute_name }}
-                                                </div>
-                                            @endif                                          
-                                        @endforeach                                           
-                                    @endforeach
-
->>>>>>> e52ea393095341d5226e74edb6b70d8bc034eb9b
                                     <div style="margin-left: 15px" id="product-attribute">    
                                     </div>    
                                 </div>
