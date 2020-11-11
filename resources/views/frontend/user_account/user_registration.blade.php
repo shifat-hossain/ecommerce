@@ -136,7 +136,7 @@
             }
         }).done(function () {
             $("#success_msg").html("Registration Successfull");
-            location.reload();
+            // location.reload();
         }).fail(function (data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);
             $.each(json_data.errors, function (key, value) {
