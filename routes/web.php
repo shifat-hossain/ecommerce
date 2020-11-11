@@ -60,27 +60,26 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
 //    Customer
     Route::resource('categories', 'Admin\CategoryController');
-    
+
 //    Brand
     Route::resource('brands', 'Admin\BrandController');
-    
+
 //    Sliders
     Route::resource('sliders', 'Admin\SliderController');
-    
+
 //    Attributes
     Route::resource('attributes', 'Admin\AttributeController');
 
     //Get Attribute Group By Id
     Route::post('fetch-attribute-group/{any}', 'Admin\AttributeController@fetch_attribute_group');
     //Get Attribute Group By Id
-
     //Delete Attribute  By Id
     Route::delete('delete-attribute/{any}', 'Admin\AttributeController@delete_attribute');
     //Delete Attribute By Id
-
     //update Attribute By Id
     Route::post('attributes-update/{any}', 'Admin\AttributeController@attributes_update');
     //Update Attribute By Id
+    //
     //Upload Summernote Image
     Route::post('summurnote-image-upload', 'Admin\AttributeController@summurnote_image_upload')->middleware('auth');
     //Upload Summernote Image
@@ -88,7 +87,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::resource('products', 'Admin\ProductController')->middleware('auth');
     Route::post('products/upload', 'Admin\ProductController@upload')->name('products.upload');
 
+//Types
+    Route::resource('types', 'Admin\TypeController');
 
+//    Units
+    Route::resource('units', 'Admin\UnitController');
+    
+    
+Route::get('company', 'Admin\AdminController@index');
+Route::post('edit-company-data', 'Admin\AdminController@edit_company_data');
 
 });
 
@@ -103,12 +110,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
 
 
-Route::resource('types', 'Admin\TypeController')->middleware('auth');
-Route::resource('units', 'Admin\UnitController')->middleware('auth');
 
 
-//Get states by country id
-Route::get('company', 'Admin\AdminController@index');
-Route::post('edit-company-data', 'Admin\AdminController@edit_company_data');
+
+
 
 

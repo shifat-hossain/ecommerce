@@ -175,7 +175,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 method: "POST",
-                url: "{{url("edit-company-data")}}",
+                url: "{{url("admin/edit-company-data")}}",
                 data: data,
                 cache: false,
                 contentType: false,
