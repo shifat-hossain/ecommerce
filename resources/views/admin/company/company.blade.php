@@ -75,7 +75,7 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="inputGroupSelect07" class="">Facebook Link:</label>
-                                <input type="text" class="form-control" name="fb_link" value="{{ $company_data[0]->fb_link}}">
+                                <input type="text" class="form-control" name="facebook_link" value="{{ $company_data[0]->facebook_link}}">
                             </div>
                         </div>
 
@@ -101,11 +101,21 @@
                                 <input type="text" class="form-control" name="google_link" value="{{ $company_data[0]->google_link}}">
                             </div>
                         </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="inputGroupSelect07" class="">Instagram Link:</label>
+                                <input type="text" class="form-control" name="instagram_link" value="{{ $company_data[0]->instagram_link}}">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
                          <label for="inputGroupSelect07" class="">Address:</label>
                         <textarea class="form-control textarea text-left p-3 h-100" name="company_address" id="exampleFormControlTextarea1" rows="2" placeholder="Company Address">{{ $company_data[0]->company_address}}</textarea>
+                    </div>
+                    <div class="form-group">
+                         <label for="inputGroupSelect07" class="">Company Summary:</label>
+                        <textarea class="form-control textarea text-left p-3 h-100" name="company_summary" id="exampleFormControlTextarea1" rows="2" placeholder="Company Summary">{{ $company_data[0]->company_summary}}</textarea>
                     </div>
 
                     <div class="form-group">

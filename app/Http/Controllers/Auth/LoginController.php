@@ -30,7 +30,7 @@ class LoginController extends Controller
      * @return Response
      */
     protected function authenticated() {
-        return redirect('/dashboard');
+        return redirect('/admin/dashboard');
     }
 
     /**

@@ -51,7 +51,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url : "{{url("user-list")}}",
+            url : "{{url("admin/user-list")}}",
             type : 'POST',
             'data': function(data){
              }

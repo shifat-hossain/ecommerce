@@ -30,18 +30,22 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('user/registration', 'UserAccountController@user_registration');
 Route::post('user/store-registration', 'UserAccountController@store_registration');
-Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard')->middleware('auth');
 
 
+Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function() {
+    Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
+    
+    Route::post('vendor-list', 'Admin\VendorController@vendor_list');
+    Route::resource('vendors', 'Admin\VendorController');
+    
+    Route::resource('roles', 'Admin\RoleController');
+    Route::resource('permissions', 'Admin\PermissionController');
+    
+    Route::post('user-list', 'Admin\UserController@user_list');
+    Route::resource('users', 'Admin\UserController');
+});
 
 
-Route::post('vendor-list', 'Admin\VendorController@vendor_list')->middleware('auth');
-Route::resource('vendors', 'Admin\VendorController')->middleware('auth');
-
-Route::resource('roles', 'Admin\RoleController')->middleware('auth');
-Route::resource('permissions', 'Admin\PermissionController')->middleware('auth');
-Route::resource('users', 'Admin\UserController')->middleware('auth');
-Route::post('user-list', 'Admin\UserController@user_list')->middleware('auth');
 
 Route::resource('customers', 'Admin\CustomerController')->middleware('auth');
 Route::post('customer-list', 'Admin\CustomerController@customer_list')->middleware('auth');

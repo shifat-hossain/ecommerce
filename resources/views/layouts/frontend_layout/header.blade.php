@@ -68,7 +68,7 @@
                     </div>
                     <div class="brand-logo">
                         <a href="index.html">
-                            <img src="{{asset('public')}}/frontend_asset/images/icon/logo.png" class="img-fluid blur-up lazyload" alt="">
+                            <img src="{{asset('storage')}}/app/@isset($company_data[0]->company_thumbnail){{$company_data[0]->company_thumbnail}}@endisset" class="img-fluid blur-up lazyload" alt="">
                         </a>
                     </div>
                 </div>
