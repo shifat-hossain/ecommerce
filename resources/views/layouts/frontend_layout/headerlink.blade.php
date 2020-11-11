@@ -4,6 +4,7 @@
 <meta name="description" content="multikart">
 <meta name="keywords" content="multikart">
 <meta name="author" content="multikart">
+<meta name="csrf-token-home" content="{{ csrf_token() }}">
 <link rel="icon" href="{{asset('public')}}/frontend_asset/images/favicon/1.png" type="image/x-icon">
 <link rel="shortcut icon" href="{{asset('public')}}/frontend_asset/images/favicon/1.png" type="image/x-icon">
 
