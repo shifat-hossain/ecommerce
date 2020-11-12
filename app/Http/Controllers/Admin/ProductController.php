@@ -129,7 +129,7 @@ class ProductController extends Controller {
 
         $product->name = $request->name;
         $product->brand_id = $request->brand;
-        $product->vendor_id = $request->vendor;
+//        $product->vendor_id = $request->vendor;
         $product->main_category = $request->main_category;
         $product->slug = $request->slug;
         $product->sku = $request->sku;
@@ -165,11 +165,18 @@ class ProductController extends Controller {
         $data_attribute = array();
         if($request->attribute) {
             foreach ($request->attribute as $row) {           
-                $data_attribute['product_id'] = $product->id;
-                $data_attribute['attribute_id'] = $row;
+//                $data_attribute['product_id'] = $product->id;
+//                $data_attribute['attribute_id'] = $row;
+//                $data_attribute['product_attribute_quantity'] = $request->quantity;
+                
+                $data_attribute[] = [
+                    'product_id' => $product->id,
+                    'attribute_id' => $row,
+                    'product_attribute_quantity' => $request->quantity
+                ];
                 //$product->attributes()->attach($data_attribute);
-                DB::table('products_attributes')->insert($data_attribute);
             }
+            DB::table('products_attributes')->insert($data_attribute);
         }
         
         $data_image = array();
