@@ -36,16 +36,16 @@
                             {{ $loop->iteration }}
                         </td>
                         <td>
-                            <img src="" alt="brand image" style="width: 80px;">
+                            <img src="{{ asset("storage/app/".$row->product_images[0]->images_name) }}" alt="brand image" style="width: 80px;">
                         </td>
                         <td>
                             {{ $row->name }}
                         </td>
                         <td>
-                            
+                            {{ $row->product_main_category->category_name }}
                         </td>
                         <td>
-                            
+                            {{ $row->brand->brand_name }}
                         </td>
                         <td>
                             {{ $row->price }}
@@ -66,14 +66,14 @@
                             
                              
                             @if(Auth::user()->can('edit-product'))
-                            <a href="admin/products/{{ $row->id }}/edit"  class="btn btn-success btn-sm mr-2 float-left text-white">
+                            <a href="products/{{ $row->id }}/edit"  class="btn btn-success btn-sm mr-2 float-left text-white">
                                 Edit
                             </a> 
                             @endif
                             
 
                             @if(Auth::user()->can('delete-product'))
-                            <form method="post" action="{{ route('products.destroy', $row->id) }}">
+                            <form method="post" action="{{ route('products.destroy', $row->id) }}" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button onclick="return confirm('Are you sure want to delete this?');" type="submit" class="btn btn-danger btn-sm float-left">Delete</button>

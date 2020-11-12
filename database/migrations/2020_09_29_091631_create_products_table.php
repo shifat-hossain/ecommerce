@@ -28,7 +28,7 @@ class CreateProductsTable extends Migration
             $table->longText('description')->nullable();
             $table->string('tags')->nullable();
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
-            $table->foreignId('vendor_id')->constrained('vendors')->onDelete('cascade');
+            $table->foreignId('vendor_id')->nullable()->constrained('vendors')->onDelete('cascade');
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();

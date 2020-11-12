@@ -44,14 +44,14 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="inputGroupSelect07" class="">Company Name:</label>
-                                <input type="text" class="form-control" name="company_name" value="{{ $company_data[0]->company_name }}">
+                                <input type="text" class="form-control" name="company_name" value="@isset($company_data->company_name){{ $company_data->company_name }}@endisset">
                             </div>
                         </div>
 
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="inputGroupSelect07" class="">Comapny Email:</label>
-                                <input type="text" class="form-control" name="company_email" value="{{ $company_data[0]->company_email}}">
+                                <input type="text" class="form-control" name="company_email" value="@isset($company_data->company_email){{ $company_data->company_email }}@endisset">
                             </div>
                         </div>
                     </div><!-- end form-row -->
@@ -59,7 +59,7 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="inputGroupSelect07" class="">Company Phone:</label>
-                                <input type="text" class="form-control" name="company_phone" value="{{ $company_data[0]->company_phone}}">
+                                <input type="text" class="form-control" name="company_phone" value="@isset($company_data->company_phone){{ $company_data->company_phone }}@endisset">
                             </div>
                         </div>
 
@@ -75,14 +75,14 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="inputGroupSelect07" class="">Facebook Link:</label>
-                                <input type="text" class="form-control" name="facebook_link" value="{{ $company_data[0]->facebook_link}}">
+                                <input type="text" class="form-control" name="facebook_link" value="@isset($company_data->facebook_link){{ $company_data->facebook_link }}@endisset">
                             </div>
                         </div>
 
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="inputGroupSelect07" class="">Twitter Link:</label>
-                                <input type="text" class="form-control" name="twitter_link" value="{{ $company_data[0]->twitter_link}}">
+                                <input type="text" class="form-control" name="twitter_link" value="@isset($company_data->twitter_link){{ $company_data->twitter_link }}@endisset">
                             </div>
                         </div>
                     </div>
@@ -91,31 +91,31 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="inputGroupSelect07" class="">Pinterest Link:</label>
-                                <input type="text" class="form-control" name="pinterest_link" value="{{ $company_data[0]->pinterest_link}}">
+                                <input type="text" class="form-control" name="pinterest_link" value="@isset($company_data->pinterest_link){{ $company_data->pinterest_link }}@endisset">
                             </div>
                         </div>
 
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="inputGroupSelect07" class="">Google Link:</label>
-                                <input type="text" class="form-control" name="google_link" value="{{ $company_data[0]->google_link}}">
+                                <input type="text" class="form-control" name="google_link" value="@isset($company_data->google_link){{ $company_data->google_link }}@endisset">
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="inputGroupSelect07" class="">Instagram Link:</label>
-                                <input type="text" class="form-control" name="instagram_link" value="{{ $company_data[0]->instagram_link}}">
+                                <input type="text" class="form-control" name="instagram_link" value="@isset($company_data->instagram_link){{ $company_data->instagram_link }}@endisset">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                          <label for="inputGroupSelect07" class="">Address:</label>
-                        <textarea class="form-control textarea text-left p-3 h-100" name="company_address" id="exampleFormControlTextarea1" rows="2" placeholder="Company Address">{{ $company_data[0]->company_address}}</textarea>
+                        <textarea class="form-control textarea text-left p-3 h-100" name="company_address" id="exampleFormControlTextarea1" rows="2" placeholder="Company Address">@isset($company_data->company_address){{ $company_data->company_address }}@endisset</textarea>
                     </div>
                     <div class="form-group">
                          <label for="inputGroupSelect07" class="">Company Summary:</label>
-                        <textarea class="form-control textarea text-left p-3 h-100" name="company_summary" id="exampleFormControlTextarea1" rows="2" placeholder="Company Summary">{{ $company_data[0]->company_summary}}</textarea>
+                        <textarea class="form-control textarea text-left p-3 h-100" name="company_summary" id="exampleFormControlTextarea1" rows="2" placeholder="Company Summary">@isset($company_data->company_summary){{ $company_data->company_summary }}@endisset</textarea>
                     </div>
 
                     <div class="form-group">
@@ -133,13 +133,13 @@
                         <div class="col-md" id="">
                             <div class="form-group">
                                 <label for="exampleInputuname">Longitude</label>
-                                <input type="text" class="form-control" id="longitude" name="longitude" readonly="" value="{{ $company_data[0]->longitude}}">
+                                <input type="text" class="form-control" id="longitude" name="longitude" readonly="" value="@isset($company_data->longitude){{ $company_data->longitude }}@endisset">
                             </div><!-- end form-group -->
                         </div>
                         <div class="col-md" id="">
                             <div class="form-group">
                                 <label for="exampleInputuname">Latitude</label>
-                                <input type="text" class="form-control" id="latitude" name="latitude" readonly="" value="{{ $company_data[0]->latitude}}">
+                                <input type="text" class="form-control" id="latitude" name="latitude" readonly="" value="@isset($company_data->latitude){{ $company_data->latitude }}@endisset">
                             </div><!-- end form-group -->
                         </div>
                     </div>
@@ -184,7 +184,7 @@
 
                 }
             }).done(function () {
-                $("#success_msg").html("Data Updated Successfully");
+                $("#success_msg").html("Data Save Successfully");
                 setTimeout(function () {
                     document.location.reload();
                 }, 2000);
