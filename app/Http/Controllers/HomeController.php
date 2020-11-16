@@ -100,9 +100,11 @@ class HomeController extends Controller {
          
          \Session::put('user_id', $customer_info->id);
          \Session::put('customer_email', $customer_info->customer_email);
-
-         return redirect('user/profile');
-        }   
+          
+          return $result = array("status" => "ok","message" => "ok");
+        }else{
+          return $result = array("status" => "ok","message" => "Registration Fail");
+        } 
     }
 
     public function user_login()

@@ -20,9 +20,9 @@
                         <ul class="onhover-show-div">
 
                             @if(Session::get('user_id'))                          
-                            <li><a href="#" data-lng="es">Logout</a></li>
+                            <li><a href="{{ url('user/logout') }}" >Logout</a></li>
                             @else
-                            <li><a href="#" data-lng="en">Login</a></li>
+                            <li><a href="{{ url('user/login') }}" data-lng="en">Login</a></li>
                             <li><a href="{{ url('user/registration') }}" data-lng="en">Registration</a></li>
                             @endif
                             

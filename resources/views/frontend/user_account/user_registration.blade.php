@@ -35,8 +35,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h3>create account</h3>
-
-                    <h5 class="success_msg" style="color: green;font-weight: 600;"></h5>
+                    <h4 id="err_msg" style="color: red;font-weight: 600;text-align: center;"></h4>
                     <div class="theme-card">
                         <form id="add_form" class="theme-form">
                             
@@ -134,9 +133,12 @@
             success: function (data, textStatus, jqXHR) {
 
             }
-        }).done(function () {
-            $("#success_msg").html("Registration Successfull");
-            location.reload();
+        }).done(function (data) {
+            if (data.status == 'ok') {
+                window.location.href = "{{ url('user/profile')}}";
+            }else if(data.status == 'not_ok'){
+                $("#err_msg").html(data.message);
+            }
         }).fail(function (data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);
             $.each(json_data.errors, function (key, value) {
