@@ -20,6 +20,8 @@
 <link rel="stylesheet" type="text/css" href="{{asset('public')}}/frontend_asset/css/slick.css">
 <link rel="stylesheet" type="text/css" href="{{asset('public')}}/frontend_asset/css/slick-theme.css">
 
+<link rel="stylesheet" type="text/css" href="{{asset('public')}}/frontend_asset/css/price-range.css">
+
 <!-- Animate icon -->
 <link rel="stylesheet" type="text/css" href="{{asset('public')}}/frontend_asset/css/animate.css">
 

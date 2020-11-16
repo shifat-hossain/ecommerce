@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Slider;
+use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller {
@@ -25,20 +27,23 @@ class HomeController extends Controller {
      */
     public function index() {
         $data['all_slider'] = Slider::all();
-        $data['company_data'] =  DB::table('company_info')->first();
-        // $data['all_parent_category'] = Category::whereNull('parent_id')->get();
-//        echo '<pre>';print_r($data['all_parent_category']);die;
+        
         return view('frontend/home_content', $data);
     }
     
     public function category_product($param) {
         $data = array();
-//        echo 32423;echo url()->previous();die;
-        $data['category_info'] = Category::where('slug', $param)->get();
-        $data['all_parent_category'] = Category::whereNull('parent_id')->get();
-         $data['company_data'] = DB::table('company_info')->where('id', 1)->get();
-        if(count($data['category_info'])) {
-            $data['category_products'] = Category::where('parent_id')->get();
+        $data['all_brand'] = Brand::all();
+        $data['category_info'] = Category::where('slug', $param)->first();
+        
+        if($data['category_info']) {
+            
+            $data['category_products'] = Product::addSelect(['id' => function ($query) use($data) {
+                                                $query->select('product_id')
+                                                        ->from('products_categories')
+                                                        ->where('category_id', $data['category_info']->id)
+                                                        ->orderBy('products.id', 'desc');
+                                            }])->get();
             
             return view('frontend/category/category_wise_product_list', $data);
         } else {
