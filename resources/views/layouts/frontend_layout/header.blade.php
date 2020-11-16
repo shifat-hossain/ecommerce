@@ -6,8 +6,8 @@
             <div class="col-lg-6">
                 <div class="header-contact">
                     <ul>
-                        <li>Welcome to Our store @isset($company_data->company_name){{$company_data->company_name}}@endisset</li>
-                        <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: @isset($company_data->company_phone){{$company_data->company_phone}}@endisset</li>
+                        <li>Welcome to Our store @isset(company_info()->company_name){{company_info()->company_name}}@endisset</li>
+                        <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: @isset(company_info()->company_phone){{company_info()->company_phone}}@endisset</li>
                     </ul>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="brand-logo">
                         <a href="index.html">
-                            <img src="{{asset('storage')}}/app/@isset($company_data->company_thumbnail){{$company_data->company_thumbnail}}@endisset" class="img-fluid blur-up lazyload" alt="">
+                            <img src="{{asset('storage')}}/app/@isset(company_info()->company_thumbnail){{company_info()->company_thumbnail}}@endisset" class="img-fluid blur-up lazyload" alt="">
                         </a>
                     </div>
                 </div>

@@ -110,5 +110,9 @@ class HomeController extends Controller {
     {
         return view('frontend/user_account/user_login'); 
     }
+    
+     public function company_info() {
+        return company_info();
+    }
 
 }
