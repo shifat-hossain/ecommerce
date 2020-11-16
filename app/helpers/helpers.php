@@ -22,6 +22,16 @@ if (!function_exists('get_all_country')) {
 }
 
 
+if (!function_exists('get_all_country_wise_state')) {
+
+    function get_all_country_wise_state($id) {
+
+     return $all_state = DB::table('states')->where('country_id',$id)->get();
+    
+    }
+}
+
+
 if (!function_exists('get_state')) {
 
     function get_state($id) {

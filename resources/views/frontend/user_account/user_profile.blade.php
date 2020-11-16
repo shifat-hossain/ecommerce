@@ -77,103 +77,107 @@
                                             <div class="dashboard-box">
                                                 <div class="dashboard-title">
                                                     <h4>profile</h4>
-                                                    <span data-toggle="modal" data-target="#edit-profile">edit</span>
+                                                    <span id="edit-profile">edit</span>
                                                 </div>
-                                                <div class="dashboard-detail">
-                                                    <ul>
-                                                        <li>
-                                                            <div class="details">
-                                                                <div class="left">
-                                                                    <h6>Code</h6>
+                                                <div id="profile_edit">
+                                                    <div class="dashboard-detail">
+                                                        <ul>
+                                                            <li>
+                                                                <div class="details">
+                                                                    <div class="left">
+                                                                        <h6>Code</h6>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <input type="hidden" id="customer_id" value="{{$customer_info[0]->id}}">
+                                                                        <h6>{{$customer_info[0]->customer_code}}</h6>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="right">
-                                                                    <h6>{{$customer_info[0]->customer_code}}</h6>
+                                                            </li>
+                                                            <li>
+                                                                <div class="details">
+                                                                    <div class="left">
+                                                                        <h6>First name</h6>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <h6>{{$customer_info[0]->customer_first_name}}</h6>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="details">
-                                                                <div class="left">
-                                                                    <h6>First name</h6>
+                                                            </li>
+                                                            <li>
+                                                                <div class="details">
+                                                                    <div class="left">
+                                                                        <h6>Last name</h6>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <h6>{{$customer_info[0]->customer_last_name}}</h6>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="right">
-                                                                    <h6>{{$customer_info[0]->customer_first_name}}</h6>
+                                                            </li>
+                                                            <li>
+                                                                <div class="details">
+                                                                    <div class="left">
+                                                                        <h6>Email</h6>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <h6>{{$customer_info[0]->customer_email}}</h6>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="details">
-                                                                <div class="left">
-                                                                    <h6>Last name</h6>
+                                                            </li>
+                                                            <li>
+                                                                <div class="details">
+                                                                    <div class="left">
+                                                                        <h6>Phone</h6>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <h6>{{$customer_info[0]->customer_phone}}</h6>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="right">
-                                                                    <h6>{{$customer_info[0]->customer_last_name}}</h6>
+                                                            </li>
+                                                            <li>
+                                                                <div class="details">
+                                                                    <div class="left">
+                                                                        <h6>Country</h6>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <h6>{{$customer_info[0]->country_name}}</h6>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="details">
-                                                                <div class="left">
-                                                                    <h6>Email</h6>
+                                                            </li>
+                                                            <li>
+                                                                <div class="details">
+                                                                    <div class="left">
+                                                                        <h6>State</h6>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <h6>{{$customer_info[0]->state_name}}</h6>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="right">
-                                                                    <h6>{{$customer_info[0]->customer_email}}</h6>
+                                                            </li>
+                                                            <li>
+                                                                <div class="details">
+                                                                    <div class="left">
+                                                                        <h6>Address</h6>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <h6>{{$customer_info[0]->customer_address}}</h6>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="details">
-                                                                <div class="left">
-                                                                    <h6>Phone</h6>
+                                                            </li>
+                                                            <li>
+                                                                <div class="details">
+                                                                    <div class="left">
+                                                                        <h6>Postal Code</h6>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <h6>{{$customer_info[0]->customer_postal_code}}</h6>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="right">
-                                                                    <h6>{{$customer_info[0]->customer_phone}}</h6>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="details">
-                                                                <div class="left">
-                                                                    <h6>Country</h6>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>{{$customer_info[0]->country_name}}</h6>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="details">
-                                                                <div class="left">
-                                                                    <h6>State</h6>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>{{$customer_info[0]->state_name}}</h6>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="details">
-                                                                <div class="left">
-                                                                    <h6>Address</h6>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>{{$customer_info[0]->customer_address}}</h6>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="details">
-                                                                <div class="left">
-                                                                    <h6>Postal Code</h6>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>{{$customer_info[0]->customer_postal_code}}</h6>
-                                                                </div>
-                                                            </div>
-                                                        </li>
+                                                            </li>
 
-                                                    </ul>
+                                                        </ul>
+                                                    </div>
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -255,5 +259,78 @@
 
 
 @section('extra-scripts')
+
+<script type="text/javascript">
+
+    $(document).on('click', '#edit-profile', function() {
+        var id = $('#customer_id').val();
+         $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token-home"]').attr('content')
+            },
+            url: "{{url('user/edit-profile')}}/" + id,
+            success: function (response) {
+                $('#profile_edit').html(response);
+            }
+        });
+    });
+
+    $(document).on('change', '#country_id', function() {
+        var id = $(this).find(':selected').val();
+        var country_name = $(this).find(':selected').text();
+        $('#country_name').val(country_name);
+         $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token-home"]').attr('content')
+            },
+            url: "{{url('get-states')}}/" + id,
+            success: function (response) {
+                $('#state_id').html(response);
+            }
+        });
+    });
+
+    $(document).on('change', '#state_id', function() {
+        let state_value = $("select#state_id option").filter(":selected").val();
+        var splitted = state_value.split('|');
+        var id = splitted.shift();
+        var state_name = splitted.join(',');
+        $('#state_id_view').val(id);
+        $('#state_name').val(state_name);
+    });
+
+
+    $(document).on('click', '#edit_btn', function() {
+
+        var url = "{{url("user/update-profile")}}"
+        var id = $('[name=id]').val();
+        $(".error_msg").html('');
+        var data = new FormData($('#edit_form')[0]);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token-home"]').attr('content')
+            },
+            method: "POST",
+            url: url + '/' + id,
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data, textStatus, jqXHR) {
+
+            }
+        }).done(function () {
+            $("#success_msg").html("Data Update Successfully");
+            // window.location.href = "{{ url('admin/customers')}}";
+            location.reload();
+        }).fail(function (data, textStatus, jqXHR) {
+            var json_data = JSON.parse(data.responseText);
+            $.each(json_data.errors, function (key, value) {
+                $("#" + key).after("<span class='error_msg' style='color: red;font-weigh: 600'>" + value + "</span>");
+            });
+        });
+    });
+    
+</script>
 
 @endsection

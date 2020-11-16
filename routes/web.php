@@ -28,12 +28,19 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/{any}', 'HomeController@category_product')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('user/registration', 'UserAccountController@user_registration');
-Route::post('user/store-registration', 'UserAccountController@store_registration');
-Route::get('user/profile/{any}', 'UserAccountController@user_profile');
+Route::get('user/registration', 'HomeController@user_registration');
+Route::post('user/store-registration', 'HomeController@store_registration');
+Route::get('user/login', 'HomeController@user_login');
 
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+Route::group(['middleware' => 'customer_authenticate'], function() {
+    Route::get('user/profile', 'UserAccountController@user_profile');
+    Route::get('user/edit-profile/{any}', 'UserAccountController@user_profile_edit');
+    Route::put('user/update-profile/{any}', 'UserAccountController@user_profile_update');
+});
+
+
+    Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
 
 //    Vendors
