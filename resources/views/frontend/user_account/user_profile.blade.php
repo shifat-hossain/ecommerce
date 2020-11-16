@@ -56,12 +56,13 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="modal" data-target="#logout"
+                                    <a class="nav-link" data-toggle="modal" data-target="#change_password"
                                         href="#">Change Password</a>
                                 </li>
 
-                                <li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#logout"
-                                        href="#">logout</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('user/logout') }}">logout
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -234,21 +235,40 @@
 
 
     <!-- Modal start -->
-    <div class="modal logout-modal fade" id="logout" tabindex="-1" role="dialog">
+    <div class="modal logout-modal fade" id="change_password" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Logging Out</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Do you want to log out?
+                    <h4 id="secc_msg" style="color: green;font-weight: 600;text-align: center;"></h4>
+                    <h4 id="err_msg" style="color: red;font-weight: 600;text-align: center;"></h4>
+                    <form id="pass_form" class="theme-form">
+                        <div class="form-group">
+                            <input type="hidden" id="c_id" name="c_id" value="{{$customer_info[0]->id}}">
+                            <label for="review">Old Password</label>
+                            <input type="password" name="old_password" class="form-control" id="old_password"
+                            placeholder="Enter your old password" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="review">Password</label>
+                            <input type="password" name="password" class="form-control" id="password"
+                            placeholder="Enter your password" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="review">Confirm Password</label>
+                            <input type="password" name="confirm_password" class="form-control" id="confirm_password"
+                            placeholder="Enter your password" required="">
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-dark btn-custom" data-dismiss="modal">no</a>
-                    <a href="index.html" class="btn btn-solid btn-custom">yes</a>
+                    <a id="pass_btn" type="button"  class="btn btn-solid btn-custom">yes</a>
                 </div>
             </div>
         </div>
@@ -299,6 +319,44 @@
         $('#state_name').val(state_name);
     });
 
+
+    $(document).on('click', '#pass_btn', function() {
+
+        var url = "{{url("user/change-password")}}"
+        // var id = $('$customer_id').val();
+        $(".error_msg").html('');
+        var data = new FormData($('#pass_form')[0]);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token-home"]').attr('content')
+            },
+            method: "POST",
+            url: url,
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data, textStatus, jqXHR) {
+
+            }
+        }).done(function (data) {
+            
+            if (data.status== 'ok') {
+                $("#secc_msg").html(data.message);
+            }else if(data.status == 'not_ok'){
+                $("#err_msg").html(data.message);
+            }
+
+            setInterval(function() {
+                location.reload();
+            }, 3000);
+        }).fail(function (data, textStatus, jqXHR) {
+            var json_data = JSON.parse(data.responseText);
+            $.each(json_data.errors, function (key, value) {
+                $("#" + key).after("<span class='error_msg' style='color: red;font-weigh: 600'>" + value + "</span>");
+            });
+        });
+    });
 
     $(document).on('click', '#edit_btn', function() {
 

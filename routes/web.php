@@ -31,12 +31,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('user/registration', 'HomeController@user_registration');
 Route::post('user/store-registration', 'HomeController@store_registration');
 Route::get('user/login', 'HomeController@user_login');
+Route::post('user/login-check', 'HomeController@user_login_check');
 
 
 Route::group(['middleware' => 'customer_authenticate'], function() {
     Route::get('user/profile', 'UserAccountController@user_profile');
     Route::get('user/edit-profile/{any}', 'UserAccountController@user_profile_edit');
     Route::put('user/update-profile/{any}', 'UserAccountController@user_profile_update');
+    Route::get('user/logout', 'UserAccountController@user_logout');
+    Route::post('user/change-password', 'UserAccountController@user_change_password');
 });
 
 

@@ -9,12 +9,11 @@ class CustomerAuthenticate
 {
 	public function handle($request, Closure $next)
 	{
-		$userId = Session::get('user_id');
 
+		$userId = Session::get('user_id');
+		
 		if (!isset($userId)) {
 			return redirect('user/login');
-		}else{
-			return redirect('user/profile');
 		}
 
 		return $next($request);
