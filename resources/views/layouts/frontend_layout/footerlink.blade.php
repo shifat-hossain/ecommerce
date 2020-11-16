@@ -9,6 +9,7 @@
 
 <!-- popper js-->
 <script src="{{asset('public')}}/frontend_asset/js/popper.min.js"></script>
+<script src="{{asset('public')}}/frontend_asset/js/price-range.js"></script>
 
 <!-- slick js-->
 <script src="{{asset('public')}}/frontend_asset/js/slick.js"></script>

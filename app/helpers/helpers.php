@@ -46,6 +46,13 @@ if (!function_exists('get_state')) {
         return response($html);    
     }
 }
+if (!function_exists('company_info')) {
+
+    function company_info() {
+
+      return $company_data = DB::table('company_info')->first();       
+    }
+}
 
 
 

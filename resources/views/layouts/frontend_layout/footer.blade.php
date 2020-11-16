@@ -6,7 +6,7 @@
                     <div class="subscribe">
                         <div>
                             <h4>KNOW IT ALL FIRST!</h4>
-                            <p>Never Miss Anything From @isset($company_data->company_name){{$company_data->company_name}}@endisset By Signing Up To Our Newsletter.</p>
+                            <p>Never Miss Anything From @isset(company_info()->company_name){{company_info()->company_name}}@endisset By Signing Up To Our Newsletter.</p>
                         </div>
                     </div>
                 </div>
@@ -34,14 +34,14 @@
                     <h4>about</h4>
                 </div>
                 <div class="footer-contant">
-                    <div class="footer-logo"><img src="{{asset('storage')}}/app/@isset($company_data->company_thumbnail){{$company_data->company_thumbnail}}@endisset" alt=""></div>
-                    <p>@isset($company_data->company_summary){{$company_data->company_summary}}@endisset</p>
+                    <div class="footer-logo"><img src="{{asset('storage')}}/app/@isset(company_info()->company_thumbnail){{company_info()->company_thumbnail}}@endisset" alt=""></div>
+                    <p>@isset(company_info()->company_summary){{company_info()->company_summary}}@endisset</p>
                     <div class="footer-social">
                         <ul>
-                            <li><a href="//@isset($company_data->facebook_link){{$company_data->facebook_link}}@endisset"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="//@isset($company_data->google_link){{$company_data->google_link}}@endisset"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                            <li><a href="//@isset($company_data->twitter_link){{$company_data->twitter_link}}@endisset"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href="//@isset($company_data->instagram_link){{$company_data->instagram_link}}@endisset"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="//@isset(company_info()->facebook_link){{company_info()->facebook_link}}@endisset"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="//@isset(company_info()->google_link){{company_info()->google_link}}@endisset"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li><a href="//@isset(company_info()->twitter_link){{company_info()->twitter_link}}@endisset"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="//@isset(company_info()->instagram_link){{company_info()->instagram_link}}@endisset"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                           
                         </ul>
                     </div>
@@ -86,10 +86,10 @@
                     </div>
                     <div class="footer-contant">
                         <ul class="contact-list">
-                            <li><i class="fa fa-map-marker"></i>@isset($company_data->company_address){{$company_data->company_address}}@endisset
+                            <li><i class="fa fa-map-marker"></i>@isset(company_info()->company_address){{company_info()->company_address}}@endisset
                             </li>
-                            <li><i class="fa fa-phone"></i>Call Us: @isset($company_data->company_phone){{$company_data->company_phone}}@endisset</li>
-                            <li><i class="fa fa-envelope-o"></i>Email Us: @isset($company_data->company_email){{$company_data->company_email}}@endisset</li>
+                            <li><i class="fa fa-phone"></i>Call Us: @isset(company_info()->company_phone){{company_info()->company_phone}}@endisset</li>
+                            <li><i class="fa fa-envelope-o"></i>Email Us: @isset(company_info()->company_email){{company_info()->company_email}}@endisset</li>
                           
                         </ul>
                     </div>
