@@ -241,7 +241,7 @@ class ProductController extends Controller {
         }
 
 
-//        echo '<pre>';print_r($product_attibute_array);die;
+        echo '<pre>';print_r($data['product_data']->attributes);die;
         $data['product_attibute_array'] = $product_attibute_array;
         $category_list = "<ul class=''><li class='form-control-label text-right main-category'>Main category</li>" . $this->buildCategory('', $category, $data['product_data']->main_category) . "</ul>";
         $data['category_list'] = $category_list;
