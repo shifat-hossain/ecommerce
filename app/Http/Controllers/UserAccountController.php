@@ -68,20 +68,17 @@ class UserAccountController extends Controller
 
     public function user_change_password(Request $request)
     {
+        $userId = Session::get('user_id');
+
         $request->validate([
             'old_password' => 'required',
             'password' => 'required|required_with:confirm_password|same:confirm_password',
             'confirm_password' => 'min:6',
         ]);
-        
-        // $data['password'] = $request->password;
-        $customer_info = Customer::find($request->c_id);
+
+        $customer_info = Customer::find($userId);
         
         if(Hash::check($request->old_password, $customer_info->password)){
-            // DB::table('customers')
-            // ->where('id', $request->c_id)
-            // ->update($data);
-            // echo "<pre>";print_r($request->password);die();
             $customer_info->password = Hash::Make($request->password);
             $customer_info->save();
 
