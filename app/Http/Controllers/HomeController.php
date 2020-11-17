@@ -38,16 +38,15 @@ class HomeController extends Controller {
         $data = array();
         $data['all_brand'] = Brand::all();
         $data['category_info'] = Category::where('slug', $param)->first();
-        
+         
         if($data['category_info']) {
             
-            $data['category_products'] = Product::addSelect(['id' => function ($query) use($data) {
-                                                $query->select('product_id')
-                                                        ->from('products_categories')
-                                                        ->where('category_id', $data['category_info']->id)
-                                                        ->orderBy('products.id', 'desc');
-                                            }])->get();
-            
+           $data['category_products'] = Product::whereIn("id", function ($query) use ($data) {
+                        $query->select('product_id')
+                                ->from('products_categories')
+                                ->where('category_id', $data['category_info']->id);
+                    })->get();
+//                      echo '<pre>';          print_r($data['category_products']);die;
             return view('frontend/category/category_wise_product_list', $data);
         } else {
             return view('frontend/404_page', $data);

@@ -43,7 +43,7 @@ Route::group(['middleware' => 'customer_authenticate'], function() {
 });
 
 
-    Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
 
 //    Vendors
@@ -80,7 +80,7 @@ Route::group(['middleware' => 'customer_authenticate'], function() {
     Route::delete('delete-attribute/{any}', 'Admin\AttributeController@delete_attribute');
     //update Attribute By Id
     Route::post('attributes-update/{any}', 'Admin\AttributeController@attributes_update');
-    
+
     //Upload Summernote Image
     Route::post('summurnote-image-upload', 'Admin\AttributeController@summurnote_image_upload')->middleware('auth');
 //  products
@@ -96,6 +96,14 @@ Route::group(['middleware' => 'customer_authenticate'], function() {
 });
 
 Route::get('get-states/{any}', 'Admin\CustomerController@get_states');
+
+Route::group(['prefix' => 'cart'], function() {
+    Route::get('cart-list', 'CartController@index');
+    Route::get('add-to-cart', 'CartController@add_cart');
+    Route::get('update-to-cart', 'CartController@update_cart');
+    Route::get('delete-to-cart', 'CartController@delete_cart');
+    Route::get('go-to-checkout', 'CartController@go_to_checkout');
+});
 
 
 

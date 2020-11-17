@@ -276,7 +276,7 @@
                                                             </a>
                                                         </div>
                                                         <div class="cart-info cart-wrap">
-                                                            <button onclick="addCart('{{ $row->id }}')" data-toggle="modal" data-target="#addtocart" title="Add to cart">
+                                                            <button onclick="addCart({{ $row->id }})" data-toggle="modal" data-target="#addtocart" title="Add to cart">
                                                                 <i class="ti-shopping-cart"></i>
                                                             </button> 
                                                             <a href="javascript:void(0)" title="Add to Wishlist">
@@ -296,7 +296,7 @@
                                                             <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
                                                             <a href="product-page(no-sidebar).html">
                                                                 <h6>
-                                                                    {{ $row->name }}
+                                                                    {{ $row->id }}
                                                                 </h6>
                                                             </a>
                                                             <p>
