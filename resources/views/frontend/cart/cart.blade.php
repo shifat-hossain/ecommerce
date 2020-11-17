@@ -143,7 +143,7 @@
             </div>
             <div class="row cart-buttons">
                 <div class="col-6"><a href="#" class="btn btn-solid">continue shopping</a></div>
-                <div class="col-6"><a href="#" onclick="goToCheckout()" class="btn btn-solid">check out</a></div>
+                <div class="col-6"><a style="cursor: pointer;color: white" onclick="goToCheckout()" class="btn btn-solid">check out</a></div>
             </div>
         </div>
     </section>
@@ -193,6 +193,7 @@
 
                 }
             }).done(function () {
+                alert('Well');
                 $(".success_msg").html("Data Save Successfully");
 //                location.reload();
             })
