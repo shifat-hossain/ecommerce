@@ -22,3 +22,8 @@
 
 <!-- Theme js-->
 <script src="{{asset('public')}}/frontend_asset/js/script.js"></script>
+<script>
+    function addCart(id){
+        
+    }
+</script>

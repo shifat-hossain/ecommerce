@@ -276,7 +276,7 @@
                                                             </a>
                                                         </div>
                                                         <div class="cart-info cart-wrap">
-                                                            <button data-toggle="modal" data-target="#addtocart" title="Add to cart">
+                                                            <button onclick="addCart('{{ $row->id }}')" data-toggle="modal" data-target="#addtocart" title="Add to cart">
                                                                 <i class="ti-shopping-cart"></i>
                                                             </button> 
                                                             <a href="javascript:void(0)" title="Add to Wishlist">
