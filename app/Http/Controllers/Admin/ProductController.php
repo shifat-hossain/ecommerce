@@ -241,7 +241,7 @@ class ProductController extends Controller {
         }
 
 
-        echo '<pre>';print_r($data['product_data']->attributes);die;
+//        echo '<pre>';print_r($data['product_data']->attributes()->with("attribute_group")->get());die;
         $data['product_attibute_array'] = $product_attibute_array;
         $category_list = "<ul class=''><li class='form-control-label text-right main-category'>Main category</li>" . $this->buildCategory('', $category, $data['product_data']->main_category) . "</ul>";
         $data['category_list'] = $category_list;
@@ -314,12 +314,16 @@ class ProductController extends Controller {
                 ->delete();
         
         if($request->attribute) {
-            foreach ($request->attribute as $row) {           
-                $data_attribute['product_id'] = $product->id;
-                $data_attribute['attribute_id'] = $row;
-                //$product->attributes()->attach($data_attribute);
-                DB::table('products_attributes')->insert($data_attribute);
+            foreach ($request->attribute as $row) {
+                $data_attribute[] = [
+                    'product_id' => $product->id,
+                    'attribute_id' => $row,
+                    'product_attribute_quantity' => $request->quantity
+                ];
             }
+            
+            DB::table('products_attributes')->insert($data_attribute);
+            
         }
         
         $data_image = array();

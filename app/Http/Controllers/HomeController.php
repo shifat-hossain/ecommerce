@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 use App\Models\Slider;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Customer;
-
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Attribute;
 
 class HomeController extends Controller {
 
@@ -41,12 +42,30 @@ class HomeController extends Controller {
         
         if($data['category_info']) {
             
-            $data['category_products'] = Product::addSelect(['id' => function ($query) use($data) {
-                                                $query->select('product_id')
-                                                        ->from('products_categories')
-                                                        ->where('category_id', $data['category_info']->id)
-                                                        ->orderBy('products.id', 'desc');
-                                            }])->get();
+            $data['category_products'] = Product::whereIn("id", function ($query) use ($data) {
+                        $query->select('product_id')
+                                ->from('products_categories')
+                                ->where('category_id', $data['category_info']->id);
+                    })->get();
+            
+            $attributes = Attribute::with(['attribute_group'])->whereHas('products.categories', function($q) use ($data) {
+                $q->where('category_id', $data['category_info']->id);
+            })->get();
+            
+            $max_val = 0;
+            foreach ($data['category_products'] as $row) {
+                if($max_val < $row->price){
+                    $max_val = $row->price;
+                }
+            }
+            
+            $attribute_array = array();
+            foreach ($attributes as $attribute) {
+                $attribute_array[$attribute->attribute_group->attribute_group_name][] = $attribute;
+            }
+            
+            $data['price_max_val'] = $max_val;
+            $data['products_attributes'] = $attribute_array;
             
             return view('frontend/category/category_wise_product_list', $data);
         } else {

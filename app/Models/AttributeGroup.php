@@ -15,4 +15,8 @@ class AttributeGroup extends Model
     public function attributes() {
         return $this->hasMany('App\Models\Attribute');
     }
+    
+    public function product_attributes() {
+        return $this->belongsToMany(Attribute::class, 'products_attributes');
+    }
 }
