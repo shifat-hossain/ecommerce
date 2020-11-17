@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Support\Facades\Hash;
 use Session;
+
 class UserAccountController extends Controller
 {
 
@@ -18,6 +19,7 @@ class UserAccountController extends Controller
     public function user_profile()
     {
         $userId = Session::get('user_id');
+        // echo "<pre>";print_r($userId);die();
     	$data['customer_info'] = Customer::where('id',$userId)->get();
     	$data['order_list'] = Order::where('customer_id',$data['customer_info'][0]->id)->get();
     	//echo "<pre>";print_r($data['customer_info'][0]->id);die();
@@ -56,5 +58,35 @@ class UserAccountController extends Controller
         $customer_info->customer_address = $request->customer_address;
 
         $customer_info->save();
+    }
+
+    public function user_logout()
+    {
+        Session::flush();
+        return redirect('user/login');
+    }
+
+
+    public function user_change_password(Request $request)
+    {
+        $userId = Session::get('user_id');
+
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required|required_with:confirm_password|same:confirm_password',
+            'confirm_password' => 'min:6',
+        ]);
+
+        $customer_info = Customer::find($userId);
+        
+        if(Hash::check($request->old_password, $customer_info->password)){
+            $customer_info->password = Hash::Make($request->password);
+            $customer_info->save();
+
+            return $result = array("status" => "ok","message" => "Password Change Successfully");
+        }else{
+            return $result = array("status" => "not_ok","message" => "Invalid Old Password");
+        }
+       
     }
 }

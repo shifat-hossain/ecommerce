@@ -98,12 +98,13 @@ class HomeController extends Controller {
 
         if ($customer_info->save()) {
          
-
          \Session::put('user_id', $customer_info->id);
          \Session::put('customer_email', $customer_info->customer_email);
-
-         return redirect('user/profile');
-        }   
+          
+          return $result = array("status" => "ok","message" => "ok");
+        }else{
+          return $result = array("status" => "ok","message" => "Registration Fail");
+        } 
     }
 
     public function user_login()
@@ -113,6 +114,31 @@ class HomeController extends Controller {
     
      public function company_info() {
         return company_info();
+    }
+
+    public function user_login_check(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required|min:6',
+        ]);   
+
+        $login_info = Customer::where('customer_email',$request->email)->first();
+
+
+        if ($login_info) {
+            if(Hash::check($request->password, $login_info->password)){
+                \Session::put('user_id', $login_info->id);
+                \Session::put('customer_email', $login_info->customer_email);
+
+                return $result = array("status" => "ok","message" => "ok");
+            }else{
+                return $result = array("status" => "not_ok","message" => "Invalid Password");
+            }
+        }else{
+            return $result = array("status" => "not_ok","message" => "Unregisterd User");
+        }
+        // echo "<pre>";print_r($login_info->password);die();
     }
 
 }
