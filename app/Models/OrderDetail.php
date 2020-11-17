@@ -4,16 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-class Order extends Model
+class OrderDetail extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'orders';
+    protected $table = 'order_details';
 
-    public function order_details() {
-        return $this->hasMany(OrderDetail::class, 'order_id');
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 }

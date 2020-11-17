@@ -19,7 +19,6 @@ class CreateOrdersTable extends Migration
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
             $table->string('customer_name', 255);
             $table->string('order_status', 20);
-            $table->double('order_total', 25, 2);
             $table->double('order_tax_percent', 3, 2);
             $table->double('order_tax_amount', 25, 2);
             $table->double('order_discount_amount', 25, 2);

@@ -202,6 +202,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
                             @endif
 
+                            @if($user->can('view-order'))
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-user-lock"></i>
+                                    <p>
+                                        Order
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{url('admin/orders')}}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                All Order
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{url('admin/orders/create')}}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Add Order
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </li>
+                            @endif
+
                             @if($user->hasRole('super-admin'))
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
