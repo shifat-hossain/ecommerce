@@ -42,6 +42,7 @@ Route::group(['middleware' => 'customer_authenticate'], function() {
     Route::post('user/change-password', 'UserAccountController@user_change_password');
 });
 
+
 // admin routes
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
@@ -92,6 +93,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 });
 
 Route::get('get-states/{any}', 'Admin\CustomerController@get_states');
+
+Route::group(['prefix' => 'cart'], function() {
+    Route::get('cart-list', 'CartController@index');
+    Route::get('add-to-cart', 'CartController@add_cart');
+    Route::get('update-to-cart', 'CartController@update_cart');
+    Route::get('delete-to-cart', 'CartController@delete_cart');
+    Route::get('go-to-checkout', 'CartController@go_to_checkout');
+});
 
 
 

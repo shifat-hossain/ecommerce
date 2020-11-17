@@ -56,47 +56,29 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- color filter start here -->
-                        <div class="collection-collapse-block open">
-                            <h3 class="collapse-block-title">colors</h3>
-                            <div class="collection-collapse-block-content">
-                                <div class="color-selector">
-                                    <ul>
-                                        <li class="color-1 active"></li>
-                                        <li class="color-2"></li>
-                                        <li class="color-3"></li>
-                                        <li class="color-4"></li>
-                                        <li class="color-5"></li>
-                                        <li class="color-6"></li>
-                                        <li class="color-7"></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        
+                        @foreach($products_attributes as $key => $val)
                         <!-- size filter start here -->
                         <div class="collection-collapse-block border-0 open">
-                            <h3 class="collapse-block-title">size</h3>
+                            <h3 class="collapse-block-title">
+                                {{ $key }}
+                            </h3>
                             <div class="collection-collapse-block-content">
                                 <div class="collection-brand-filter">
+
+                                    @foreach($val as $row)
                                     <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="hundred">
-                                        <label class="custom-control-label" for="hundred">s</label>
+                                        <input type="checkbox" class="custom-control-input" id="hundred" value="{{ $row->id }}">
+                                        <label class="custom-control-label" for="hundred">
+                                            {{ $row->attribute_name }}
+                                        </label>
                                     </div>
-                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="twohundred">
-                                        <label class="custom-control-label" for="twohundred">m</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="threehundred">
-                                        <label class="custom-control-label" for="threehundred">l</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="fourhundred">
-                                        <label class="custom-control-label" for="fourhundred">xl</label>
-                                    </div>
+                                    @endforeach
+                                    
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                         <!-- price filter start here -->
                         <div class="collection-collapse-block border-0 open">
                             <h3 class="collapse-block-title">price</h3>
@@ -276,7 +258,7 @@
                                                             </a>
                                                         </div>
                                                         <div class="cart-info cart-wrap">
-                                                            <button data-toggle="modal" data-target="#addtocart" title="Add to cart">
+                                                            <button onclick="addCart({{ $row->id }})" data-toggle="modal" data-target="#addtocart" title="Add to cart">
                                                                 <i class="ti-shopping-cart"></i>
                                                             </button> 
                                                             <a href="javascript:void(0)" title="Add to Wishlist">
@@ -296,7 +278,7 @@
                                                             <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
                                                             <a href="product-page(no-sidebar).html">
                                                                 <h6>
-                                                                    {{ $row->name }}
+                                                                    {{ $row->id }}
                                                                 </h6>
                                                             </a>
                                                             <p>
@@ -359,4 +341,74 @@
 </section>
 <!-- section End -->
 
+@endsection
+
+@section('extra-scripts')
+<script>
+    var $range = $(".js-range-slider"),
+        $inputFrom = $(".js-input-from"),
+        $inputTo = $(".js-input-to"),
+        instance,
+        min = 0,
+        max = "<?php echo $price_max_val;?>",
+        from = 0,
+        to = 0;
+
+    $range.ionRangeSlider({
+        type: "double",
+        min: min,
+        max: max,
+        from: 0,
+        to: 3000,
+        prefix: '$',
+        onStart: updateInputs,
+        onChange: updateInputs,
+        step: 100,
+        prettify_enabled: true,
+        prettify_separator: ".",
+        values_separator: " - ",
+        force_edges: true
+
+
+    });
+
+    instance = $range.data("ionRangeSlider");
+
+    function updateInputs(data) {
+        from = data.from;
+        to = data.to;
+        $inputFrom.prop("value", from);
+        $inputTo.prop("value", to);
+    }
+
+    $inputFrom.on("input", function() {
+        var val = $(this).prop("value");
+
+        // validate
+        if (val < min) {
+            val = min;
+        } else if (val > to) {
+            val = to;
+        }
+
+        instance.update({
+            from: val
+        });
+    });
+
+    $inputTo.on("input", function() {
+        var val = $(this).prop("value");
+
+        // validate
+        if (val < from) {
+            val = from;
+        } else if (val > max) {
+            val = max;
+        }
+
+        instance.update({
+            to: val
+        });
+    });
+</script>
 @endsection
