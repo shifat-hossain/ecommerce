@@ -35,7 +35,7 @@
                 <div class="col-sm-12">
                     <table class="table cart-table table-responsive-xs">
                         @if(session('cart'))
-                         @php $total= 0; $subtotal = 0; @endphp   
+                         @php $total= 0; @endphp   
                         <thead>
                             <tr class="table-head">
                                 <th scope="col">image</th>
@@ -47,9 +47,8 @@
                             </tr>
                         </thead>                                               
                         @foreach(session('cart') as $id => $details)
-                       @php 
-                       $subtotal = $details['quantity'] * $details['price'];
-                       $total += $subtotal;
+                       @php                       
+                       $total += $details['subtotal'];
                        @endphp   
                         <tbody>
                             <tr>
@@ -88,7 +87,7 @@
                                 </td>
                                 <td><a style="cursor: pointer" onclick="deleteCart({{ $details['product_id'] }})" class="icon"><i class="ti-close"></i></a></td>
                                 <td>
-                                    <h4 class="td-color">TK.{{ $subtotal }}</h4>
+                                    <h4 class="td-color">TK.{{ $details['subtotal'] }}</h4>
                                 </td>
                             </tr>
                         </tbody>

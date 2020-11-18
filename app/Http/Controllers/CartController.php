@@ -132,7 +132,7 @@ class CartController extends Controller {
             $shipping_data = ['shipping_id' => 1];
             $order = new Order;
             $order['customer_id'] = $customer_data->id;
-            $order['customer_name'] = $customer_data->customer_first_name . ''. $customer_data->customer_last_name;
+            $order['customer_name'] = $customer_data->customer_first_name . ' '. $customer_data->customer_last_name;
             $order['order_status'] = 0;
 //            $order['shipping_cost'] = session('order_data')['shipping_cost'];
             $order['order_tax_amount'] = session('order_data')['order_tax_amount'];
