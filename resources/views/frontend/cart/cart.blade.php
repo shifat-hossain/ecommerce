@@ -5,6 +5,9 @@
 @section('home_content')
 
 
+
+
+
 <!-- breadcrumb start -->
 <div class="breadcrumb-section">
     <div class="container">
@@ -34,8 +37,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <table class="table cart-table table-responsive-xs">
-                    @if(session('cart'))
-                    @php $total= 0; @endphp   
+                    @if(session('cart')) 
                     <thead>
                         <tr class="table-head">
                             <th scope="col">image</th>
@@ -46,10 +48,7 @@
                             <th scope="col">total price</th>
                         </tr>
                     </thead>                                               
-                    @foreach(session('cart') as $id => $details)
-                    @php                       
-                    $total += $details['subtotal'];
-                    @endphp   
+                    @foreach(session('cart') as $details)  
                     <tbody>
                         <tr>
                             <td>
@@ -86,7 +85,8 @@
                                 </div>
                             </td>
                             <td><a style="cursor: pointer" onclick="deleteCart({{ $details['product_id'] }})" class="icon"><i class="ti-close"></i></a></td>
-                            <td>
+              
+                                      <td>
                                 <h4 class="td-color">TK.{{ $details['subtotal'] }}</h4>
                             </td>
                         </tr>
@@ -199,9 +199,11 @@
             success: function (data, textStatus, jqXHR) {
 
             }
-    }).done(function () {       
-    window.location.href = '{{url('cart/checkout')}}';   
+    }).done(function () {
     $("#success_msg").html("Redirecting to checkout page");
+     setTimeout(function(){
+    window.location.href = '{{url('cart/checkout')}}'; 
+    }, 1000);
     })
     }else{
         alert('please add products to cart to go for checkout');

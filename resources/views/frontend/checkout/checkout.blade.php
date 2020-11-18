@@ -91,7 +91,7 @@
                             <div class="checkout-details">
                                 <div class="order-box">
                                     <div class="title-box">
-                                        <div>Product <span>Sub Total</span></div>
+                                        <div>Product <span>Total</span></div>
                                     </div>
                                     @if(session('cart'))                                     
                                     @foreach(session('cart') as $id => $details)                                      
@@ -102,7 +102,7 @@
                                     @endforeach                       
                                     @endif
                                     <ul class="sub-total">
-                                        <li>Subtotal <span class="count">
+                                        <li>Sub total <span class="count">
                                                  @if(session('order_data'))
                                                  Tk.{{session('order_data')['order_sub_total']}}
                                                  @endif
@@ -158,7 +158,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    @if(session('order_data'))<div class="text-right"><a href="#" onclick="placeOrder()" class="btn-solid btn">Place Order</a></div>@endif
+                                    @if(session('order_data'))<div class="text-right"><a  onclick="placeOrder()" class="btn-solid btn">Place Order</a></div>@endif
                                
                                 </div>
                                  <div id="success_msg" style="text-align: center"></div>

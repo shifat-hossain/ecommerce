@@ -34,20 +34,11 @@ function addCart(id) {
         url: "{{url('cart/add-to-cart')}}/",
         data: {product_id: id, quantity: '', attribute_id: ''},
         success: function (data, textStatus, jqXHR) {
-
-        }
-    }).done(function () {        
         $(".success_msg").html("Data Save Successfully");
         getCart();
-//                location.reload();
-    }).fail(function (data, textStatus, jqXHR) {
-        var json_data = JSON.parse(data.responseText);
-        $.each(json_data.errors, function (key, value) {
-            $("#" + key).after("<span class='error_msg' style='color: red;font-weigh: 600'>" + value + "</span>");
-        });
+        }
     });
-}
-;
+};
 
 function getCart() {
     $.ajax({

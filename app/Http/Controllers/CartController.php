@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Customer;
+use App\Models\Attribute;
 
 class CartController extends Controller {
 
@@ -19,6 +20,29 @@ class CartController extends Controller {
     public function add_cart(Request $request) {
         $product = Product::find($request->product_id);
         $id = $request->product_id;
+        $quantity = $request->quantity;
+        if ($quantity != '') {
+            $quantity = $request->quantity;
+        } else {
+            $quantity = 1;
+        }
+
+        $attribute_id = $request->attribute_id;
+        if ($attribute_id != '') {
+            $attribute_id = $request->attribute_id;
+        } else {
+            $attribute_id = 3;
+        }
+        $attributes = Attribute::with(['attribute_group'])->whereHas('products.attributes', function($q) use ($attribute_id) {
+                    $q->where('attribute_id', $attribute_id);
+                })->get();
+
+        $attribute_array = array();
+        foreach ($attributes as $attribute) {
+            $group_name = $attribute['attribute_group']['attribute_group_name'];
+            $attribute_array[$group_name][] = $attribute;
+        }
+
         if (!$product) {
 
             abort(404);
@@ -33,17 +57,18 @@ class CartController extends Controller {
                 $id => [
                     "product_id" => $product->id,
                     "name" => $product->name,
-                    "quantity" => 1,
+                    "quantity" => $quantity,
                     "attribute_id" => $request->attribute_id,
+                    "attributes" => $attribute_array,
                     "sku" => $product->sku,
                     "price" => $product->price,
                     "image" => $product->product_images[0]['images_name'],
-                    'subtotal' => $product->price * (1)
+                    'attribute_id' => $attribute_id,
+                    'subtotal' => $product->price * ($quantity)
                 ]
-            ];            
+            ];
             session()->put('cart', $cart);
             $this->OrderData();
-
             return;
         }
 
@@ -52,6 +77,10 @@ class CartController extends Controller {
 
             $cart[$id]['quantity']++;
             $cart[$id]["subtotal"] = $cart[$id]['quantity'] * $cart[$id]["price"];
+            if ($request->attribute_id != null) {
+                $cart[$id]["attribute_id"] = $request->attribute_id;
+                $cart[$id]["attributes"] = $attribute_array;
+            }
             session()->put('cart', $cart);
             $this->OrderData();
             return;
@@ -61,12 +90,14 @@ class CartController extends Controller {
         $cart[$id] = [
             "product_id" => $product->id,
             "name" => $product->name,
-            "quantity" => 1,
+            "quantity" => $quantity,
             "attribute_id" => $request->attribute_id,
             "sku" => $product->sku,
             "price" => $product->price,
             "image" => $product->product_images[0]['images_name'],
-            'subtotal' => $product->price * (1)
+            'attribute_id' => $attribute_id,
+            "attributes" => $attribute_array,
+            'subtotal' => $product->price * ($quantity)
         ];
 
         session()->put('cart', $cart);
@@ -183,7 +214,7 @@ class CartController extends Controller {
                 'order_discount_amount' => $order_discount_amount
             ];
             session()->put('order_data', $data);
-        }else{
+        } else {
             session()->forget('order_data');
         }
     }
@@ -203,7 +234,7 @@ class CartController extends Controller {
 //            
 //            $order['shipping_id'] = $shipping_id;
 //            $order['shipping_cost'] = session('order_data')['shipping_cost'];
-            
+
             $order['order_tax_amount'] = session('order_data')['order_tax_amount'];
             $order['order_grand_total'] = session('order_data')['order_grand_total'];
             $order['order_code'] = session('order_data')['order_code'];
@@ -224,10 +255,10 @@ class CartController extends Controller {
                 $order_detail['order_product_price'] = $row['price'];
                 $order_detail->save();
             }
-            
+
             session()->forget('cart');
             session()->forget('order_data');
-            
+
             return redirect('/');
         } else {
             return redirect('cart/checkout');
