@@ -100,6 +100,8 @@ Route::group(['prefix' => 'cart'], function() {
     Route::get('update-to-cart', 'CartController@update_cart');
     Route::get('delete-to-cart', 'CartController@delete_cart');
     Route::get('go-to-checkout', 'CartController@go_to_checkout');
+    Route::get('checkout', 'CartController@checkout');
+    Route::get('place-order', 'CartController@place_order');
 });
 
 

@@ -158,9 +158,9 @@
                                     </div>
                                 </li>
                                 <li class="onhover-div mobile-cart">
-                                    <div><img src="{{asset('public')}}/frontend_asset/images/icon/cart.png"
+                                    <div><a href="{{url('cart/cart-list')}}"><img src="{{asset('public')}}/frontend_asset/images/icon/cart.png"
                                               class="img-fluid blur-up lazyload" alt=""> <i
-                                              class="ti-shopping-cart"></i></div>
+                                              class="ti-shopping-cart"></i></a></div>
                                     <ul class="show-div shopping-cart">
                                         <li>
                                             <div class="media">

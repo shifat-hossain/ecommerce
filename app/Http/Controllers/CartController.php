@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Customer;
 
 class CartController extends Controller {
 
@@ -35,7 +38,8 @@ class CartController extends Controller {
                     "attribute_id" => $request->attribute_id,
                     "sku" => $product->sku,
                     "price" => $product->price,
-                    "image" => $product->product_images[0]['images_name']
+                    "image" => $product->product_images[0]['images_name'],
+                    'subtotal' => $product->price * (1)
                 ]
             ];
 
@@ -48,7 +52,7 @@ class CartController extends Controller {
         if (isset($cart[$id])) {
 
             $cart[$id]['quantity']++;
-
+            $cart[$id]["subtotal"] = $cart[$id]['quantity'] * $cart[$id]["price"];
             session()->put('cart', $cart);
 
             return;
@@ -62,7 +66,8 @@ class CartController extends Controller {
             "attribute_id" => $request->attribute_id,
             "sku" => $product->sku,
             "price" => $product->price,
-            "image" => $product->product_images[0]['images_name']
+            "image" => $product->product_images[0]['images_name'],
+            'subtotal' => $product->price * (1)
         ];
 
         session()->put('cart', $cart);
@@ -75,6 +80,7 @@ class CartController extends Controller {
         if ($id && $request->quantity) {
             $cart = session()->get('cart');
             $cart[$id]["quantity"] = $request->quantity;
+            $cart[$id]["subtotal"] = $request->quantity * $cart[$id]["price"];
             session()->put('cart', $cart);
             session()->flash('success', 'Cart updated successfully');
         }
@@ -92,14 +98,71 @@ class CartController extends Controller {
         }
     }
 
-    public function go_to_checkout(Request $request) {      
+    public function go_to_checkout(Request $request) {
+        $order_tax_percent = 0;
         $data = [
-        'shipping_cost' => $request->shipping_cost,
-        'tax_cost' => $request->tax_cost,
-        'grand_total' => $request->grand_total
+            'shipping_cost' => $request->shipping_cost,
+            'order_tax_amount' => $request->tax_cost,
+            'order_grand_total' => $request->grand_total,
+            'order_code' => "#order_code.$request->grand_total.",
+            'order_total' => $request->order_total,
+            'order_sub_total' => $request->order_total,
+            'order_tax_percent' => $order_tax_percent,
+            'order_discount_amount'=>100
         ];
-        session()->put('cart_data', $data);
-        print_r(session('cart_data'));
+        session()->put('order_data', $data);
+        print_r(session('order_data'));
+    }
+
+    public function checkout() {
+        $customer_id = 1;
+        if ($customer_id != null) {
+            return view('frontend/checkout/checkout');
+        } else {
+            return redirect('cart/cart-list');
+        }
+    }
+
+    public function place_order(Request $request) {
+        $customer_id = 1;
+        $billing_id = $request->billing_id;
+        if ($customer_id != null && $billing_id != null) {
+
+            $customer_data = Customer::find($customer_id);
+            $shipping_data = ['shipping_id' => 1];
+            $order = new Order;
+            $order['customer_id'] = $customer_data->id;
+            $order['customer_name'] = $customer_data->customer_first_name . ''. $customer_data->customer_last_name;
+            $order['order_status'] = 0;
+//            $order['shipping_cost'] = session('order_data')['shipping_cost'];
+            $order['order_tax_amount'] = session('order_data')['order_tax_amount'];
+            $order['order_grand_total'] = session('order_data')['order_grand_total'];
+            $order['order_code'] = session('order_data')['order_code'];
+            $order['order_total'] = session('order_data')['order_total'];
+            $order['order_sub_total'] = session('order_data')['order_sub_total'];
+            $order['order_tax_percent'] = session('order_data')['order_tax_percent'];
+            $order['order_discount_amount'] = session('order_data')['order_discount_amount'];
+            $order['order_date'] = date("Y-m-d h:i:s");
+            $order->save();
+
+            
+            foreach (session('cart') as $row) {
+                $order_detail = new OrderDetail;
+                $order_detail['order_id'] = $order->id;
+                $order_detail['order_code'] = $order->order_code;
+                $order_detail['order_product_id'] = $row['product_id'];
+                $order_detail['order_product_name'] = $row['name'];
+                $order_detail['order_product_quantity'] = $row['quantity'];
+                $order_detail['order_product_price'] = $row['price'];
+                $order_detail->save();
+            }
+            session()->forget('cart');
+            session()->forget('order_data');
+            return redirect('/');
+            
+        } else {
+            return redirect('cart/checkout');
+        }
     }
 
 }
