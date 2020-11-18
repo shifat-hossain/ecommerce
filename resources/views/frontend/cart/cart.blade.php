@@ -101,37 +101,35 @@
                     </thead>
                     @endif
                 </table>
-                @if(isset($total) != '')
+                @if(session('order_data'))
                 <table class="table cart-table table-responsive-md">
                     <tfoot>
                         <tr>
                             <td>Sub total :</td>
                             <td>
-                                <h5 id="order_total">TK.{{ $total }}</h5>
+                                <h5 id="order_total">TK.{{session('order_data')['order_total']}}</h5>
                             </td>
 
                         </tr>
                         <tr>
                             <td>Shipping Cost :</td>
                             <td>
-                                <h5 id="shipping">TK.{{ $shipping = 60 }}</h5>
+                                <h5 id="shipping">TK.{{session('order_data')['shipping_cost']}}</h5>
                             </td>
 
                         </tr>
                         <tr>
                             <td>Vat/Tax Cost :</td>
                             <td>
-                                <h5 id="tax">TK.{{ $tax = 100 }}</h5>
+                                <h5 id="tax">TK.{{session('order_data')['order_tax_amount']}}</h5>
                             </td>
 
                         </tr>
                         <tr>
                             <td>Grand Total :</td>
                             <td>
-                                @php
-                                $grand_total = $total+$shipping+$tax;
-                                @endphp
-                                <h4 id="grand_total">TK.{{ $grand_total }}</h4>
+                               
+                                <h4 id="grand_total">TK.{{session('order_data')['order_grand_total']}}</h4>
                             </td>
 
                         </tr>
