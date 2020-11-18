@@ -121,7 +121,7 @@
                                         </li>
                                     </ul>
                                     <ul class="total">
-                                        <li>Grand Total <span class="count"> Tk.{{session('order_data')['order_grand_total']}}</span></li>
+                                        <li>Grand Total <span class="count"> Tk.@if(session('order_data')){{session('order_data')['order_grand_total']}}@endif</span></li>
                                     </ul>
                                 </div>
                                 <div class="payment-box">
@@ -158,7 +158,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="text-right"><a href="#" onclick="placeOrder()" class="btn-solid btn">Place Order</a></div>
+                                    @if(session('order_data'))<div class="text-right"><a href="#" onclick="placeOrder()" class="btn-solid btn">Place Order</a></div>@endif
                                
                                 </div>
                                  <div id="success_msg" style="text-align: center"></div>

@@ -40,9 +40,9 @@ class CartController extends Controller {
                     "image" => $product->product_images[0]['images_name'],
                     'subtotal' => $product->price * (1)
                 ]
-            ];
-
+            ];            
             session()->put('cart', $cart);
+            $this->cartTotal();
 
             return;
         }
@@ -53,7 +53,7 @@ class CartController extends Controller {
             $cart[$id]['quantity']++;
             $cart[$id]["subtotal"] = $cart[$id]['quantity'] * $cart[$id]["price"];
             session()->put('cart', $cart);
-
+            $this->cartTotal();
             return;
         }
 
@@ -70,6 +70,7 @@ class CartController extends Controller {
         ];
 
         session()->put('cart', $cart);
+        $this->cartTotal();
 
         return;
     }
@@ -85,7 +86,7 @@ class CartController extends Controller {
                       <li>
                                             <div class="media">
                                                 <a href="#"><img alt="" class="mr-3"
-                                                                 src="'.url('storage/app/'.$rowCart['image']).'" width="60"></a>
+                                                                 src="' . url('storage/app/' . $rowCart['image']) . '" width="60"></a>
                                                 <div class="media-body">
                                                     <a href="#">
                                                         <h4>' . $rowCart["name"] . '</h4>
@@ -93,7 +94,7 @@ class CartController extends Controller {
                                                     <h4><span>' . $rowCart["quantity"] . ' x Tk.' . $rowCart["price"] . '</span></h4>
                                                 </div>
                                             </div>
-                                            <div class="close-circle"><a href="#" onclick="deleteCartExceptReload('.$rowCart["product_id"].')"><i class="fa fa-times"
+                                            <div class="close-circle"><a href="#" onclick="deleteCartExceptReload(' . $rowCart["product_id"] . ')"><i class="fa fa-times"
                                                                                      aria-hidden="true"></i></a></div>
                                         </li>
                       ';
@@ -120,6 +121,8 @@ class CartController extends Controller {
                                         </li>
                       ';
         }
+
+
         return response()->json($html);
     }
 
@@ -130,6 +133,7 @@ class CartController extends Controller {
             $cart[$id]["quantity"] = $request->quantity;
             $cart[$id]["subtotal"] = $request->quantity * $cart[$id]["price"];
             session()->put('cart', $cart);
+            $this->cartTotal();
             session()->flash('success', 'Cart updated successfully');
         }
     }
@@ -141,33 +145,51 @@ class CartController extends Controller {
             if (isset($cart[$id])) {
                 unset($cart[$id]);
                 session()->put('cart', $cart);
+                $this->cartTotal();
             }
             session()->flash('success', 'Product removed successfully');
         }
     }
 
     public function go_to_checkout(Request $request) {
-        $order_tax_percent = 0;
-        $data = [
-            'shipping_cost' => $request->shipping_cost,
-            'order_tax_amount' => $request->tax_cost,
-            'order_grand_total' => $request->grand_total,
-            'order_code' => "#order_code.$request->grand_total.",
-            'order_total' => $request->order_total,
-            'order_sub_total' => $request->order_total,
-            'order_tax_percent' => $order_tax_percent,
-            'order_discount_amount' => 100
-        ];
-        session()->put('order_data', $data);
-//        print_r(session('order_data'));
+        $this->cartTotal();
     }
 
     public function checkout() {
         $customer_id = 1;
         if ($customer_id != null) {
+            $this->cartTotal();
             return view('frontend/checkout/checkout');
         } else {
             return redirect('cart/cart-list');
+        }
+    }
+
+    public function cartTotal() {
+        $cart = session()->get('cart');
+//         print_r($cart);die;
+        if (!empty($cart)) {
+            $cartTotal = 0;
+            foreach ($cart as $rowCart) {
+                $cartTotal += $rowCart['subtotal'];
+            }
+            $order_tax_percent = 0;
+            $order_tax_amount = 100;
+            $shipping_cost = 60;
+            $order_discount_amount = 100;
+            $data = [
+                'shipping_cost' => $shipping_cost,
+                'order_tax_amount' => $order_tax_amount,
+                'order_grand_total' => $shipping_cost + $order_tax_amount + $cartTotal,
+                'order_code' => "#order_code.$cartTotal.",
+                'order_total' => $cartTotal,
+                'order_sub_total' => $cartTotal,
+                'order_tax_percent' => $order_tax_percent,
+                'order_discount_amount' => $order_discount_amount
+            ];
+            session()->put('order_data', $data);
+        }else{
+            session()->forget('order_data');
         }
     }
 
