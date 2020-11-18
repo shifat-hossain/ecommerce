@@ -164,8 +164,8 @@
                                     <ul class="show-div shopping-cart">
                                         <div id="getCart"></div>
                                         <li>
-                                            <div class="buttons"><a href="cart.html" class="view-cart">view
-                                                    cart</a> <a href="#" class="checkout">checkout</a></div>
+                                            <div class="buttons"><a href="{{url('cart/cart-list')}}" class="view-cart">view
+                                                    cart</a> <a href="{{url('cart/checkout')}}" class="checkout">checkout</a></div>
                                         </li>
                                     </ul>
                                 </li>
