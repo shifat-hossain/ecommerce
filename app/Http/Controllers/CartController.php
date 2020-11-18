@@ -19,7 +19,6 @@ class CartController extends Controller {
     public function add_cart(Request $request) {
         $product = Product::find($request->product_id);
         $id = $request->product_id;
-
         if (!$product) {
 
             abort(404);
@@ -111,7 +110,7 @@ class CartController extends Controller {
             'order_discount_amount'=>100
         ];
         session()->put('order_data', $data);
-        print_r(session('order_data'));
+//        print_r(session('order_data'));
     }
 
     public function checkout() {

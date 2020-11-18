@@ -159,7 +159,9 @@
                                         </div>
                                     </div>
                                     <div class="text-right"><a href="#" onclick="placeOrder()" class="btn-solid btn">Place Order</a></div>
+                               
                                 </div>
+                                 <div id="success_msg" style="text-align: center"></div>
                             </div>
                         </div>
                     </div>
@@ -181,10 +183,11 @@
                 success: function (data, textStatus, jqXHR) {
 
                 }
-            }).done(function () {                
-                window.location.href = '{{url('/')}}';
-                alert('Order Successfully placed');
-                $(".success_msg").html("Data Save Successfully");
+            }).done(function () {               
+                $("#success_msg").html("Order placed Successfully");
+                setTimeout(function(){
+                  window.location.href = '{{url('/')}}';   
+                },1500);
 //                location.reload();
             })
     };
