@@ -42,7 +42,7 @@ class CartController extends Controller {
                 ]
             ];            
             session()->put('cart', $cart);
-            $this->cartTotal();
+            $this->OrderData();
 
             return;
         }
@@ -53,7 +53,7 @@ class CartController extends Controller {
             $cart[$id]['quantity']++;
             $cart[$id]["subtotal"] = $cart[$id]['quantity'] * $cart[$id]["price"];
             session()->put('cart', $cart);
-            $this->cartTotal();
+            $this->OrderData();
             return;
         }
 
@@ -70,7 +70,7 @@ class CartController extends Controller {
         ];
 
         session()->put('cart', $cart);
-        $this->cartTotal();
+        $this->OrderData();
 
         return;
     }
@@ -84,42 +84,41 @@ class CartController extends Controller {
                 $cartTotal += $rowCart['subtotal'];
                 $html .= '
                       <li>
-                                            <div class="media">
-                                                <a href="#"><img alt="" class="mr-3"
-                                                                 src="' . url('storage/app/' . $rowCart['image']) . '" width="60"></a>
-                                                <div class="media-body">
-                                                    <a href="#">
-                                                        <h4>' . $rowCart["name"] . '</h4>
-                                                    </a>
-                                                    <h4><span>' . $rowCart["quantity"] . ' x Tk.' . $rowCart["price"] . '</span></h4>
-                                                </div>
-                                            </div>
-                                            <div class="close-circle"><a href="#" onclick="deleteCartExceptReload(' . $rowCart["product_id"] . ')"><i class="fa fa-times"
-                                                                                     aria-hidden="true"></i></a></div>
-                                        </li>
-                      ';
+                      <div class="media">
+                        <a href="#"><img alt="" class="mr-3"
+                         src="' . url('storage/app/' . $rowCart['image']) . '" width="60"></a>
+                          <div class="media-body">
+                            <a href="#">
+                              <h4>' . $rowCart["name"] . '</h4>
+                                </a>
+                              <h4><span>' . $rowCart["quantity"] . ' x Tk.' . $rowCart["price"] . '</span></h4>
+                             </div>
+                           </div>
+                          <div class="close-circle"><a href="#" onclick="deleteCartExceptReload(' . $rowCart["product_id"] . ')"><i class="fa fa-times"
+                        aria-hidden="true"></i></a></div>
+                  </li>
+               ';
             }
             $html .= '
              <li>
-                                            <div class="total">
-                                                <h5>subtotal : <span>Tk.' . $cartTotal . '</span></h5>
-                                            </div>
-                                        </li>
-                 '
+                <div class="total">
+                   <h5>subtotal : <span>Tk.' . $cartTotal . '</span></h5>
+                 </div>
+              </li>
+             '
             ;
         } else {
             $html .= '
                       <li>
-                                            <div class="media">
-                                               
-                                                <div class="media-body">
-                                                   <h3>Your cart is empty<h3>
-                                                </div>
-                                            </div>
-                                            <div class="close-circle"><a href="#"><i class="fa fa-times"
-                                                                                     aria-hidden="true"></i></a></div>
-                                        </li>
-                      ';
+                       <div class="media">
+                         <div class="media-body">
+                           <h3>Your cart is empty<h3>
+                             </div>
+                            </div>
+                        <div class="close-circle"><a href="#"><i class="fa fa-times"
+                      aria-hidden="true"></i></a></div>
+                   </li>
+                ';
         }
 
 
@@ -133,7 +132,7 @@ class CartController extends Controller {
             $cart[$id]["quantity"] = $request->quantity;
             $cart[$id]["subtotal"] = $request->quantity * $cart[$id]["price"];
             session()->put('cart', $cart);
-            $this->cartTotal();
+            $this->OrderData();
             session()->flash('success', 'Cart updated successfully');
         }
     }
@@ -145,29 +144,28 @@ class CartController extends Controller {
             if (isset($cart[$id])) {
                 unset($cart[$id]);
                 session()->put('cart', $cart);
-                $this->cartTotal();
+                $this->OrderData();
             }
             session()->flash('success', 'Product removed successfully');
         }
     }
 
     public function go_to_checkout(Request $request) {
-        $this->cartTotal();
+        $this->OrderData();
     }
 
     public function checkout() {
         $customer_id = 1;
         if ($customer_id != null) {
-            $this->cartTotal();
+            $this->OrderData();
             return view('frontend/checkout/checkout');
         } else {
             return redirect('cart/cart-list');
         }
     }
 
-    public function cartTotal() {
+    public function OrderData() {
         $cart = session()->get('cart');
-//         print_r($cart);die;
         if (!empty($cart)) {
             $cartTotal = 0;
             foreach ($cart as $rowCart) {
