@@ -102,6 +102,7 @@ Route::group(['prefix' => 'cart'], function() {
     Route::get('go-to-checkout', 'CartController@go_to_checkout');
     Route::get('checkout', 'CartController@checkout');
     Route::get('place-order', 'CartController@place_order');
+    Route::get('get-cart', 'CartController@get_cart');
 });
 
 

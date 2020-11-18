@@ -74,6 +74,55 @@ class CartController extends Controller {
         return;
     }
 
+    public function get_cart() {
+        $cart = session()->get('cart');
+        $html = '';
+        $cartTotal = 0;
+        if (session('cart')) {
+            foreach ($cart as $rowCart) {
+                $cartTotal += $rowCart['subtotal'];
+                $html .= '
+                      <li>
+                                            <div class="media">
+                                                <a href="#"><img alt="" class="mr-3"
+                                                                 src="'.url('storage/app/'.$rowCart['image']).'" width="60"></a>
+                                                <div class="media-body">
+                                                    <a href="#">
+                                                        <h4>' . $rowCart["name"] . '</h4>
+                                                    </a>
+                                                    <h4><span>' . $rowCart["quantity"] . ' x Tk.' . $rowCart["price"] . '</span></h4>
+                                                </div>
+                                            </div>
+                                            <div class="close-circle"><a href="#" onclick="deleteCartExceptReload('.$rowCart["product_id"].')"><i class="fa fa-times"
+                                                                                     aria-hidden="true"></i></a></div>
+                                        </li>
+                      ';
+            }
+            $html .= '
+             <li>
+                                            <div class="total">
+                                                <h5>subtotal : <span>Tk.' . $cartTotal . '</span></h5>
+                                            </div>
+                                        </li>
+                 '
+            ;
+        } else {
+            $html .= '
+                      <li>
+                                            <div class="media">
+                                               
+                                                <div class="media-body">
+                                                   <h3>Your cart is empty<h3>
+                                                </div>
+                                            </div>
+                                            <div class="close-circle"><a href="#"><i class="fa fa-times"
+                                                                                     aria-hidden="true"></i></a></div>
+                                        </li>
+                      ';
+        }
+        return response()->json($html);
+    }
+
     public function update_cart(Request $request) {
         $id = $request->product_id;
         if ($id && $request->quantity) {
@@ -107,7 +156,7 @@ class CartController extends Controller {
             'order_total' => $request->order_total,
             'order_sub_total' => $request->order_total,
             'order_tax_percent' => $order_tax_percent,
-            'order_discount_amount'=>100
+            'order_discount_amount' => 100
         ];
         session()->put('order_data', $data);
 //        print_r(session('order_data'));
@@ -131,7 +180,7 @@ class CartController extends Controller {
             $shipping_data = ['shipping_id' => 1];
             $order = new Order;
             $order['customer_id'] = $customer_data->id;
-            $order['customer_name'] = $customer_data->customer_first_name . ' '. $customer_data->customer_last_name;
+            $order['customer_name'] = $customer_data->customer_first_name . ' ' . $customer_data->customer_last_name;
             $order['order_status'] = 0;
 //            $order['shipping_cost'] = session('order_data')['shipping_cost'];
             $order['order_tax_amount'] = session('order_data')['order_tax_amount'];
@@ -144,7 +193,7 @@ class CartController extends Controller {
             $order['order_date'] = date("Y-m-d h:i:s");
             $order->save();
 
-            
+
             foreach (session('cart') as $row) {
                 $order_detail = new OrderDetail;
                 $order_detail['order_id'] = $order->id;
@@ -158,7 +207,6 @@ class CartController extends Controller {
             session()->forget('cart');
             session()->forget('order_data');
             return redirect('/');
-            
         } else {
             return redirect('cart/checkout');
         }

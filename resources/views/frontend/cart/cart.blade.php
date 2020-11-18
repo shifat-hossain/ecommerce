@@ -161,6 +161,7 @@
             }
     }).done(function () {
     $("#success_msg").html("Data Save Successfully");
+    getCart();
     setTimeout(function(){
     location.reload();
     }, 500);
@@ -178,6 +179,7 @@
             }
     }).done(function () {
     $("#success_msg").html("Data Save Successfully");
+    getCart();
     setTimeout(function(){
     location.reload();
     }, 500);
