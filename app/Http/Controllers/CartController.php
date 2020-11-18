@@ -71,7 +71,6 @@ class CartController extends Controller {
 
         session()->put('cart', $cart);
         $this->OrderData();
-
         return;
     }
 
@@ -120,8 +119,6 @@ class CartController extends Controller {
                    </li>
                 ';
         }
-
-
         return response()->json($html);
     }
 
@@ -197,12 +194,16 @@ class CartController extends Controller {
         if ($customer_id != null && $billing_id != null) {
 
             $customer_data = Customer::find($customer_id);
-            $shipping_data = ['shipping_id' => 1];
+            $shipping_id = 1;
             $order = new Order;
             $order['customer_id'] = $customer_data->id;
             $order['customer_name'] = $customer_data->customer_first_name . ' ' . $customer_data->customer_last_name;
             $order['order_status'] = 0;
+//            Use when you have a billing or shipping id
+//            
+//            $order['shipping_id'] = $shipping_id;
 //            $order['shipping_cost'] = session('order_data')['shipping_cost'];
+            
             $order['order_tax_amount'] = session('order_data')['order_tax_amount'];
             $order['order_grand_total'] = session('order_data')['order_grand_total'];
             $order['order_code'] = session('order_data')['order_code'];
@@ -212,7 +213,6 @@ class CartController extends Controller {
             $order['order_discount_amount'] = session('order_data')['order_discount_amount'];
             $order['order_date'] = date("Y-m-d h:i:s");
             $order->save();
-
 
             foreach (session('cart') as $row) {
                 $order_detail = new OrderDetail;
@@ -224,8 +224,10 @@ class CartController extends Controller {
                 $order_detail['order_product_price'] = $row['price'];
                 $order_detail->save();
             }
+            
             session()->forget('cart');
             session()->forget('order_data');
+            
             return redirect('/');
         } else {
             return redirect('cart/checkout');
