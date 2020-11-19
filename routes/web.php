@@ -83,6 +83,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::post('products/upload', 'Admin\ProductController@upload')->name('products.upload');
     //orders
     Route::resource('orders', 'Admin\OrderController');
+    Route::get('order-pdf/{any}', 'Admin\OrderController@generate_pdf');
     //Types
     Route::resource('types', 'Admin\TypeController');
     //Units

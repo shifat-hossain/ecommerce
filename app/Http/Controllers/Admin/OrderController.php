@@ -8,7 +8,7 @@ use App\Models\Order;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\OrderDetail;
-
+use PDF;
 class OrderController extends Controller {
 
     /**
@@ -124,6 +124,22 @@ class OrderController extends Controller {
     public function destroy($id) {
         // order::find($id)->delete();
         // return redirect('admin/orders');
+    }
+
+
+    public function generate_pdf($id) 
+    {
+        // echo "<pre>";print_r($id);die();
+        // $data['order_details'] = Order::where('id', $id)->first();
+        // $data['customer_info'] = Customer::find($data['order_details']->customer_id);
+        
+        // echo "<pre>";print_r($id);die();
+        $data['foo'] = 'test';
+        $pdf = PDF::loadView('admin.orders.order_pdf',$data);
+
+        return $pdf->download('order1.pdf');
+
+        //  return view('admin.orders.order_pdf');
     }
 
 }
